@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21d24e01-a1d8-4683-a310-e2a1289c0665" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="21d24e01-a1d8-4683-a310-e2a1289c0665" name="Changes" comment="add services">
+      <change afterPath="$PROJECT_DIR$/api_gateway/delete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_service/delete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hotel_service/delete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity_service/delete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notifications_service/delete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/review_service/delete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/support_service/delete" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +41,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2jfolFqrtahDUpqXNWNDAF8Agsm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,12 +57,21 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/PhungManhKien/AndroidStudioProjects/LuxStay/app",
+    "last_opened_file_path": "C:/Users/hoang/AndroidStudioProjects/LuxStayv2/support_service",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\support_service" />
+      <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\review_service" />
+      <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\notifications_service" />
+      <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\identity_service" />
+      <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\hotel_service" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -64,6 +81,30 @@
       <option name="presentableId" value="Default" />
       <updated>1721787641576</updated>
     </task>
+    <task id="LOCAL-00001" summary="add services">
+      <option name="closed" value="true" />
+      <created>1721810461689</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721810461690</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add services" />
+    <option name="LAST_COMMIT_MESSAGE" value="add services" />
   </component>
 </project>
