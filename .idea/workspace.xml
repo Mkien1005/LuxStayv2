@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21d24e01-a1d8-4683-a310-e2a1289c0665" name="Changes" comment="add services">
-      <change afterPath="$PROJECT_DIR$/api_gateway/delete" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/booking_service/delete" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotel_service/delete" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity_service/delete" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notifications_service/delete" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/review_service/delete" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/support_service/delete" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity_service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_service/delete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel_service/delete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/identity_service/delete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notifications_service/delete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_service/delete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/support_service/delete" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +57,9 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/hoang/AndroidStudioProjects/LuxStayv2/support_service",
+    "last_opened_file_path": "C:/Users/hoang/Desktop/LuxStayv2/hotel_service",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -65,11 +67,15 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hoang\Desktop\LuxStayv2\hotel_service" />
       <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\support_service" />
       <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\review_service" />
       <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\notifications_service" />
       <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\identity_service" />
-      <recent name="C:\Users\hoang\AndroidStudioProjects\LuxStayv2\hotel_service" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hoang\Desktop\LuxStayv2\identiry_service" />
+      <recent name="C:\Users\hoang\Desktop\LuxStayv2" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
