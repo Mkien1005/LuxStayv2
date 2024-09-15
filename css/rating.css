@@ -1,0 +1,63 @@
+/* Đảm bảo rằng các sao sẽ được hiển thị theo chiều ngang */
+.rating {
+    display: inline-flex;
+}
+
+/* Định dạng các sao */
+.star-rating {
+    font-size: 24px;
+    /* Kích thước của sao */
+    cursor: pointer;
+    /* Con trỏ chuột khi di chuyển qua sao */
+    color: #ccc;
+    /* Màu sao chưa được chọn */
+}
+
+/* Màu sắc của sao khi được chọn */
+.star-rating.selected,
+.star-rating:hover {
+    color: #f39c12;
+    /* Màu vàng cho sao được chọn */
+}
+
+textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#uploadButton {
+    background-color: #dfa974;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+
+#uploadButton:hover {
+    background-color: #dfa974;
+}
+
+#previewContainer img {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 5px;
+}
+
+.removeImageButton {
+    position: absolute;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    font-size: 11px;
+}

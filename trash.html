@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/trash.css" />
+  </head>
+  <body>
+    <div style="position: relative; width: 300px">
+      <textarea id="commentTextarea" placeholder="Nhập bình luận..." style="width: 100%; height: 50px"></textarea>
+      <input type="file" id="fileInput" style="display: none" accept="image/*" multiple />
+      <button id="uploadButton" style="position: absolute; right: 10px; top: 10px">+</button>
+
+      <!-- Container hiển thị ảnh preview -->
+      <div id="previewContainer" style="margin-top: 10px; display: flex; flex-wrap: wrap"></div>
+    </div>
+
+    <script src="js/trash.js"></script>
+  </body>
+</html>
