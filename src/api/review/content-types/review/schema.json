@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "singularName": "review",
+    "pluralName": "reviews",
+    "displayName": "Review"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "comment": {
+      "type": "text"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "report"
+      ]
+    },
+    "user_id": {
+      "type": "biginteger"
+    },
+    "room_id": {
+      "type": "biginteger"
+    },
+    "images": {
+      "type": "json"
+    },
+    "likes": {
+      "type": "biginteger"
+    }
+  }
+}
