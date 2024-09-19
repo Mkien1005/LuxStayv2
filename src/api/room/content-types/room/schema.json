@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rooms",
+  "info": {
+    "singularName": "room",
+    "pluralName": "rooms",
+    "displayName": "Room",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "room_name": {
+      "type": "string"
+    },
+    "hotel_id": {
+      "type": "biginteger"
+    },
+    "avata": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "capacity": {
+      "type": "enumeration",
+      "enum": [
+        "Single",
+        "Couple",
+        "Family "
+      ]
+    },
+    "room_type": {
+      "type": "enumeration",
+      "enum": [
+        "VIP Room",
+        "Standard Room"
+      ]
+    },
+    "price": {
+      "type": "string"
+    },
+    "is_available": {
+      "type": "enumeration",
+      "enum": [
+        "Available",
+        "Unavailable"
+      ]
+    }
+  }
+}
