@@ -105,12 +105,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const formData = new FormData()
       formData.append('files', file)
 
-      return fetch('http://localhost:1337/api/upload', {
+      return fetch('https://review-services.onrender.com/api/upload', {
         method: 'POST',
-        headers: {
-          Authorization:
-            'Bearer dcff3e40b5780440d420a4ad97237339c846877bca7753757716917c64f8d991f8de557dd1392ce8e92514a7fa48a53280916c7e4e8f67e8a28af01a3d73f339acf3e9308e72799a51dec3889779354273231c6288696f8a563e69e2c7dd750e801100ecba0c96ccd2646f526e68f85ed57e7cd555063805bf105b310558dfa9',
-        },
         body: formData,
       })
         .then((response) => response.json())
@@ -145,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Tạo đối tượng dữ liệu
         const data = {
-          content: reviewText,
+          comment: reviewText,
           rating: selectedRating,
           user_id: '1',
           room_id: '1',
@@ -154,17 +150,16 @@ document.addEventListener('DOMContentLoaded', function () {
           likes: 0,
         }
         // Gửi dữ liệu đánh giá
-        fetch('http://localhost:1337/api/reviews', {
+        fetch('https://mkienfs.id.vn/api/reviews/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization:
-              'Bearer e287a7c877be306725b4d0956d1b78794f5879ccd971b7a150955bd4c71d4c6f1276afcedd4e92c450245d8662b55eb710ad30a6a4ec3441d9f8d20f64fb68b08e07fb68a5cd984e951f453246feb0287d3f7aec4954fc6e27e5eb2e3d1f26415e07316b83c884e7a830f0d14f753b170ce8e331eafed6f85440fb874ff6012a',
           },
           body: JSON.stringify({ data }),
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log(data)
             const comment = data.data
             const idReview = data.data.id
             const createDate = formatDate(comment.attributes.createdAt)
@@ -274,11 +269,10 @@ document.addEventListener('DOMContentLoaded', function () {
     parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
     // Gửi yêu cầu fetch để cập nhật ở phía server
-    fetch(`http://localhost:1337/api/reviews/${idReview}`, {
+    fetch(`https://mkienfs.id.vn/api/reviews/${idReview}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer 74241ebe2ee2702a45ea08c46809ad5c6a739136dadc984431e41f7d61c5c8da294ded0fa3e1829228f3835a5a5a09b4765aa36b715d8b7730a23b88c25408eb7317592e93f97456c93e8dbad2cef32b70656891a95cc4135d2ffcda890077c3816af136bb55c910e8bfc823d99e182cef81da317e84aeea6df9b97b8ef653a2`,
       },
       body: JSON.stringify({
         data: {
@@ -313,11 +307,10 @@ document.addEventListener('DOMContentLoaded', function () {
     parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
     // Gửi yêu cầu fetch để cập nhật ở phía server
-    fetch(`http://localhost:1337/api/reviews/${idReview}`, {
+    fetch(`https://mkienfs.id.vn/api/reviews/${idReview}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer 74241ebe2ee2702a45ea08c46809ad5c6a739136dadc984431e41f7d61c5c8da294ded0fa3e1829228f3835a5a5a09b4765aa36b715d8b7730a23b88c25408eb7317592e93f97456c93e8dbad2cef32b70656891a95cc4135d2ffcda890077c3816af136bb55c910e8bfc823d99e182cef81da317e84aeea6df9b97b8ef653a2`,
       },
       body: JSON.stringify({
         data: {
