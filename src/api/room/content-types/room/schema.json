@@ -23,7 +23,7 @@
       "enum": [
         "Single",
         "Couple",
-        "Family "
+        "Family"
       ]
     },
     "room_type": {

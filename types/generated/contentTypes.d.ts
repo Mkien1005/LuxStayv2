@@ -414,7 +414,7 @@ export interface ApiRoomRoom extends Schema.CollectionType {
   attributes: {
     room_name: Attribute.String;
     hotel_id: Attribute.BigInteger;
-    capacity: Attribute.Enumeration<['Single', 'Couple', 'Family ']>;
+    capacity: Attribute.Enumeration<['Single', 'Couple', 'Family']>;
     room_type: Attribute.Enumeration<['VIP Room', 'Standard Room']>;
     price: Attribute.String;
     is_available: Attribute.Enumeration<['Available', 'Unavailable']>;
