@@ -18,17 +18,6 @@
     "hotel_id": {
       "type": "biginteger"
     },
-    "avata": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "capacity": {
       "type": "enumeration",
       "enum": [
@@ -53,6 +42,9 @@
         "Available",
         "Unavailable"
       ]
+    },
+    "avatar": {
+      "type": "json"
     }
   }
 }
