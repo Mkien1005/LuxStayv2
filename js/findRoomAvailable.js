@@ -5,6 +5,14 @@ checkBtn.addEventListener('click', (e) => {
   const checkoutDate = document.querySelector('#date-out').value
   const checkIn = new Date(checkinDate)
   const checkOut = new Date(checkoutDate)
+  if (checkIn == 'Invalid Date') {
+    alert('Please choose check in day!')
+    return
+  }
+  if (checkOut == 'Invalid Date') {
+    alert('Please choose check out day!')
+    return
+  }
   // Định dạng ngày theo chuẩn ISO hoặc chuẩn YYYY-MM-DD
   const formattedCheckIn = formatDateToYYYYMMDD(checkIn) // "2024-09-24"
   const formattedCheckOut = formatDateToYYYYMMDD(checkOut) // "2024-09-25"
