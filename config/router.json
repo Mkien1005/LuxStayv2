@@ -1,0 +1,8 @@
+{
+  "method": "POST",
+  "path": "/transactions",
+  "handler": "transactions.receive",
+  "config": {
+    "policies": []
+  }
+}

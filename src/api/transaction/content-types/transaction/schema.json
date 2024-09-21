@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transactions",
+  "info": {
+    "singularName": "transaction",
+    "pluralName": "transactions",
+    "displayName": "Transaction",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "gateway": {
+      "type": "string",
+      "required": true
+    },
+    "transaction_date": {
+      "type": "datetime",
+      "required": true
+    },
+    "account_number": {
+      "type": "string"
+    },
+    "sub_account": {
+      "type": "text",
+      "required": false,
+      "maxLength": 250
+    },
+    "amount_in": {
+      "type": "decimal",
+      "default": 0,
+      "required": true
+    },
+    "amount_out": {
+      "type": "decimal",
+      "default": 0,
+      "required": true
+    },
+    "accumulated": {
+      "type": "decimal",
+      "default": 0,
+      "required": true
+    },
+    "code": {
+      "type": "text",
+      "maxLength": 250
+    },
+    "transaction_content": {
+      "type": "text"
+    },
+    "reference_number": {
+      "type": "string",
+      "maxLength": 225
+    },
+    "body": {
+      "type": "string"
+    }
+  }
+}

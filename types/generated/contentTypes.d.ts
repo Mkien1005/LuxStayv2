@@ -396,6 +396,58 @@ export interface ApiBookingBooking extends Schema.CollectionType {
   };
 }
 
+export interface ApiTransactionTransaction extends Schema.CollectionType {
+  collectionName: 'transactions';
+  info: {
+    singularName: 'transaction';
+    pluralName: 'transactions';
+    displayName: 'Transaction';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    gateway: Attribute.String & Attribute.Required;
+    transaction_date: Attribute.DateTime & Attribute.Required;
+    account_number: Attribute.String;
+    sub_account: Attribute.Text &
+      Attribute.SetMinMaxLength<{
+        maxLength: 250;
+      }>;
+    amount_in: Attribute.Decimal & Attribute.Required & Attribute.DefaultTo<0>;
+    amount_out: Attribute.Decimal & Attribute.Required & Attribute.DefaultTo<0>;
+    accumulated: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
+    code: Attribute.Text &
+      Attribute.SetMinMaxLength<{
+        maxLength: 250;
+      }>;
+    transaction_content: Attribute.Text;
+    reference_number: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 225;
+      }>;
+    body: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::transaction.transaction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::transaction.transaction',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -833,6 +885,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::booking.booking': ApiBookingBooking;
+      'api::transaction.transaction': ApiTransactionTransaction;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
