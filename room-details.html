@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/rating.css" type="text/css" />
+    <link rel="stylesheet" href="css/slide-room.css" type="text/css" />
   </head>
 
   <body>
@@ -142,9 +143,9 @@
                     <li class="active"><a href="./rooms.html">Rooms</a></li>
                     <li><a href="./about-us.html">About Us</a></li>
                     <li>
-                      <a href="./pages.html">Pages</a>
+                      <a href="#">Pages</a>
                       <ul class="dropdown">
-                        <li><a href="./room-details.html">Room Details</a></li>
+                        <li><a href="./room-details.html?hotel_id=5">Room Details</a></li>
                         <li><a href="./blog-details.html">Blog Details</a></li>
                         <li><a href="#">Family Room</a></li>
                         <li><a href="#">Premium Room</a></li>
@@ -189,7 +190,28 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="room-details-item">
-              <img src="img/room/room-details.jpg" alt="" />
+              <div class="slideshow-container">
+                <div class="slides">
+                  <img src="img/room/room-1.jpg" alt="Image 1" />
+                  <img src="img/room/room-2.jpg" alt="Image 2" />
+                  <img src="img/room/room-details.jpg" alt="Image 3" />
+                  <img src="img/room/room-4.jpg" alt="Image 4" />
+                  <img src="img/room/room-5.jpg" alt="Image 5" />
+                </div>
+
+                <!-- Nút điều hướng -->
+                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+
+                <!-- Dấu chấm hiển thị vị trí -->
+                <div class="dots">
+                  <span class="dot" onclick="currentSlide(1)"></span>
+                  <span class="dot" onclick="currentSlide(2)"></span>
+                  <span class="dot" onclick="currentSlide(3)"></span>
+                  <span class="dot" onclick="currentSlide(4)"></span>
+                  <span class="dot" onclick="currentSlide(5)"></span>
+                </div>
+              </div>
               <div class="rd-text">
                 <div class="rd-title">
                   <h3>Premium King Room</h3>
@@ -397,6 +419,7 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+    <script src="js/getHotel.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

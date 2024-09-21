@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stripe Payment</title>
+    <style>
+      /* Basic CSS styles for the form */
+      .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .form-row {
+        margin-bottom: 20px;
+      }
+      #card-element {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #5469d4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:disabled {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Thanh toán</h2>
+      <form id="payment-form">
+        <div class="form-row">
+          <label for="card-element">Thẻ tín dụng hoặc ghi nợ</label>
+          <div id="card-element"><!-- Stripe.js sẽ nhúng input thẻ ở đây --></div>
+          <div id="card-errors" role="alert"></div>
+        </div>
+        <button id="submit-button">Thanh toán</button>
+      </form>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      // Thiết lập Stripe.js và Stripe Elements
+      const stripe = Stripe('your-publishable-key') // Sử dụng khóa công khai Stripe của bạn
+      const elements = stripe.elements()
+
+      // Tạo trường thẻ (Card Element) và thêm vào form
+      const card = elements.create('card')
+      card.mount('#card-element')
+
+      // Xử lý sự kiện submit form
+      const form = document.getElementById('payment-form')
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+
+        const { paymentMethod, error } = await stripe.createPaymentMethod({
+          type: 'card',
+          card: card,
+        })
+
+        if (error) {
+          // Hiển thị lỗi
+          document.getElementById('card-errors').textContent = error.message
+        } else {
+          // Gửi paymentMethod.id tới server của bạn để xử lý thanh toán
+          console.log(paymentMethod)
+          alert('Thanh toán thành công!')
+        }
+      })
+    </script>
+  </body>
+</html>

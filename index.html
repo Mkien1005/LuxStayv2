@@ -62,9 +62,9 @@
           <li><a href="./rooms.html">Rooms</a></li>
           <li><a href="./about-us.html">About Us</a></li>
           <li>
-            <a href="./pages.html">Pages</a>
+            <a href="#">Pages</a>
             <ul class="dropdown">
-              <li><a href="./room-details.html">Room Details</a></li>
+              <li><a href="./room-details.html?hotel_id=5">Room Details</a></li>
               <li><a href="#">Deluxe Room</a></li>
               <li><a href="#">Family Room</a></li>
               <li><a href="#">Premium Room</a></li>
@@ -181,12 +181,12 @@
               <form action="#">
                 <div class="check-date">
                   <label for="date-in">Check In:</label>
-                  <input type="text" class="date-input" id="date-in" />
+                  <input type="text" class="date-input" id="date-in" readonly />
                   <i class="icon_calendar"></i>
                 </div>
                 <div class="check-date">
                   <label for="date-out">Check Out:</label>
-                  <input type="text" class="date-input" id="date-out" />
+                  <input type="text" class="date-input" id="date-out" readonly />
                   <i class="icon_calendar"></i>
                 </div>
                 <div class="select-option">
@@ -203,7 +203,7 @@
                     <option value="">2 Room</option>
                   </select>
                 </div>
-                <button type="submit">Check Availability</button>
+                <button type="submit" id="checkAvailable">Check Availability</button>
               </form>
             </div>
           </div>
@@ -650,6 +650,8 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+
+    <script src="js/findRoomAvailable.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>

@@ -1,45 +1,50 @@
-const hotelId = getHotelIdFromUrl()
-fetch(`https://mkienfs.id.vn/api/hotels/${hotelId}`)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data.data)
-  })
-  .catch((error) => {
-    console.error('Error:', error)
-  })
-function getHotelIdFromUrl() {
+function getRoomIdFromUrl() {
   const params = new URLSearchParams(window.location.search)
-  return params.get('hotel_id') // Lấy giá trị của param room_id
+  return params.get('room_id') // Lấy giá trị của param room_id
 }
 // Hàm fetch dữ liệu room và review
-async function fetchRoomAndReviews(hotelId) {
-  if (!hotelId) {
+async function fetchRoomAndReviews() {
+  const roomId = getRoomIdFromUrl() // Lấy room_id từ URL
+  if (!roomId) {
     console.error('Room ID không hợp lệ.')
     return
   }
+  fetch('https://mkienfs.id.vn/api/reviews/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    })
   try {
     // Fetch room theo room_id
-    const roomResponse = await fetch(`https://mkienfs.id.vn/api/rooms/?filters[hotel_id][$eq]=${hotelId}`, {
+    const roomResponse = await fetch(`https://mkienfs.id.vn/api/rooms/${roomId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
     if (!roomResponse.ok) {
-      throw new Error('Không tìm thấy phòng hoặc khách sạn này chưa có phòng.')
+      throw new Error('Không tìm thấy room.')
     }
     const roomData = await roomResponse.json()
     console.log('Room Data:', roomData) // In thông tin room ra console
 
     // Fetch reviews liên quan đến room_id
-    const reviewsResponse = await fetch(`https://mkienfs.id.vn/api/reviews/?filters[hotel_id][$eq]=${hotelId}`, {
+    const reviewsResponse = await fetch(`https://mkienfs.id.vn/api/reviews/?filters[room_id][$eq]=${roomId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
     if (!reviewsResponse.ok) {
-      throw new Error('Không tìm thấy bài đánh giá nào hoặc chưa có người đánh giá.')
+      throw new Error('Không tìm thấy review cho room.')
     }
     const reviewsData = await reviewsResponse.json()
     console.log('Reviews Data:', reviewsData) // In thông tin reviews ra console
@@ -51,7 +56,7 @@ async function fetchRoomAndReviews(hotelId) {
     console.error('Lỗi khi fetch room hoặc reviews:', error)
   }
 }
-fetchRoomAndReviews(hotelId)
+fetchRoomAndReviews()
 
 function displayRoomData(roomData) {}
 
@@ -65,34 +70,34 @@ function displayReviews(reviewsData) {
     const reviewItem = document.createElement('div')
     reviewItem.className = 'review-item'
     reviewItem.innerHTML = `
-                <div class="ri-pic">
-                  <img src="img/blog/blog-details/avatar/avatar-${Math.floor(Math.random() * 3) + 1}.jpg" alt="" />
+              <div class="ri-pic">
+                <img src="img/blog/blog-details/avatar/avatar-${Math.floor(Math.random() * 3) + 1}.jpg" alt="" />
+              </div>
+              <div class="ri-text">
+                <span>${createDate}</span>
+                <div class="rating">
+                  ${'<i class="fa fa-star"></i>'.repeat(review.rating)}
+                  ${'<i class="fa fa-star-o"></i>'.repeat(5 - review.rating)}
                 </div>
-                <div class="ri-text">
-                  <span>${createDate}</span>
-                  <div class="rating">
-                    ${'<i class="fa fa-star"></i>'.repeat(review.rating)}
-                    ${'<i class="fa fa-star-o"></i>'.repeat(5 - review.rating)}
-                  </div>
-                  <div class="like" style="
+                <div class="like" style="
+                position: absolute;
+                right: 25px; cursor: pointer;">
+                <div class="idReview" style="display:none">${idReview}</div>
+                <i class="fa fa-thumbs-o-up likeIcon"  aria-hidden="true">(<span class="likeCount">0</span>)</i>
+                </div>
+                <div class="more" style="
                   position: absolute;
-                  right: 25px; cursor: pointer;">
-                  <div class="idReview" style="display:none">${idReview}</div>
-                  <i class="fa fa-thumbs-o-up likeIcon"  aria-hidden="true">(<span class="likeCount">0</span>)</i>
-                  </div>
-                  <div class="more" style="
-                    position: absolute;
-                    right: 0;
-                    cursor: pointer;">
-                      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                  </div>
-                  <h5>Người dùng</h5>
-                  <p>${review.comment}</p>
-                  <div class="review-images">
-                    ${review.images.map((url) => `<img src="http://localhost:1337${url}" style="width: 175px" alt="Review Image" />`).join('')}
-                  </div>
+                  right: 0;
+                  cursor: pointer;">
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                 </div>
-              `
+                <h5>Người dùng</h5>
+                <p>${review.comment}</p>
+                <div class="review-images">
+                  ${review.images.map((url) => `<img src="http://localhost:1337${url}" style="width: 175px" alt="Review Image" />`).join('')}
+                </div>
+              </div>
+            `
 
     document.querySelector('.rd-reviews').appendChild(reviewItem)
     addEventBtn()
