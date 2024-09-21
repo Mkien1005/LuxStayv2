@@ -368,6 +368,7 @@ export interface ApiReviewReview extends Schema.CollectionType {
     singularName: 'review';
     pluralName: 'reviews';
     displayName: 'Review';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -377,7 +378,7 @@ export interface ApiReviewReview extends Schema.CollectionType {
     rating: Attribute.Integer;
     status: Attribute.Enumeration<['active', 'report']>;
     user_id: Attribute.BigInteger;
-    room_id: Attribute.BigInteger;
+    hotel_id: Attribute.BigInteger;
     images: Attribute.JSON;
     likes: Attribute.BigInteger;
     createdAt: Attribute.DateTime;

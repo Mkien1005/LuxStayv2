@@ -4,7 +4,8 @@
   "info": {
     "singularName": "review",
     "pluralName": "reviews",
-    "displayName": "Review"
+    "displayName": "Review",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -27,7 +28,7 @@
     "user_id": {
       "type": "biginteger"
     },
-    "room_id": {
+    "hotel_id": {
       "type": "biginteger"
     },
     "images": {
