@@ -1,15 +1,10 @@
-import { config } from "dotenv";
 
 module.exports = {
     routes: [
       {
-        method: 'GET',
+        method: 'POST',
         path: '/webhook',
-        handler: 'transaction.webhook', // Đường dẫn đến controller và function
-        config:{
-            auth:false,
-       }
-       
+        handler: 'webhook.webhook', // Đường dẫn đến controller và function
       }
     ],
   };

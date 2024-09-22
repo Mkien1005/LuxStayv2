@@ -1,7 +1,4 @@
 'use strict';
-
-import transaction from '../controllers/transaction';
-
 /**
  * transaction router
  */
