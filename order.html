@@ -119,14 +119,16 @@
             span.innerHTML = formatterVND.format(amount)
         })
       var pay_status = 'Unpaid';
-    
+      
       // Hàm kiểm tra trạng thái đơn hàng
       // Sử dụng Ajax để lấy trạng thái đơn hàng. Nếu thanh toán thành công thì hiển thị Box đã thanh toán thành công, ẩn box checkout
-      function check_payment_status(order_id) {
+      function check_payment_status(orderid) {
           if(pay_status == 'Unpaid') {
                $.ajax({
                     type: "POST",
-                    data: order_id,
+                    data: {
+                        order_id: orderid
+                    },
                     url: 'https://booking-service-kkos.onrender.com/api/check',
                     dataType:"json",
                     success: function(data){
