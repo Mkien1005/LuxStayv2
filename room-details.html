@@ -297,21 +297,6 @@
                       </tr>
                     </tbody>
                   </table>
-                  <!-- <div class="room-convenience">
-                    <div class="room-title">Premier Triple</div>
-                    <div class="room-option">Không gồm bữa sáng</div>
-                    <div class="room-option">Không hoàn tiền</div>
-                    <div class="room-option">1 giường</div>
-                  </div>
-                  <div class="guest"></div>
-                  <div class="booking">
-                    <div class="room-price">
-                      <span class="original-price">3.784.091 VND</span>
-                      2.772.924 VND
-                    </div>
-                    <div class="availability">Chỉ còn 2 phòng</div>
-                    <a href="#" class="select-button">Đặt phòng</a>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -441,10 +426,50 @@
       </div>
     </div>
     <!-- Search model end -->
-
+    <!-- Overlay -->
+    <div class="booking-overlay">
+      <div class="room-booking" style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30%">
+        <h3>Your Reservation</h3>
+        <form action="#">
+          <div class="check-date">
+            <label for="date-in">Check In:</label>
+            <input type="text" class="date-input hasDatepicker" id="date-in" readonly />
+            <i class="icon_calendar"></i>
+          </div>
+          <div class="check-date">
+            <label for="date-out">Check Out:</label>
+            <input type="text" class="date-input hasDatepicker" id="date-out" readonly />
+            <i class="icon_calendar"></i>
+          </div>
+          <div class="select-option">
+            <label for="guest">Guests:</label>
+            <select id="guest" style="display: none">
+              <option value="">3 Adults</option>
+            </select>
+            <div class="nice-select" tabindex="0">
+              <span class="current">3 Adults</span>
+              <ul class="list">
+                <li data-value="" class="option selected">3 Adults</li>
+              </ul>
+            </div>
+          </div>
+          <div class="select-option">
+            <label for="room">Room:</label>
+            <select id="room" style="display: none">
+              <option value="">1 Room</option>
+            </select>
+            <div class="nice-select" tabindex="0">
+              <span class="current">1 Room</span>
+              <ul class="list">
+                <li data-value="" class="option selected">1 Room</li>
+              </ul>
+            </div>
+          </div>
+          <button type="submit">Check Availability</button>
+        </form>
+      </div>
+    </div>
     <!-- Js Plugins -->
-    <script src="js/getHotel.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
@@ -453,7 +478,7 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/getHotel.js"></script>
     <script src="js/rating.js"></script>
-    <script src="js/findRoomAvailable.js"></script>
   </body>
 </html>

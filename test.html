@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Datepicker Example</title>
+
+    <!-- jQuery v3.6.0 (jQuery UI 1.12.1 tương thích với jQuery 1.7 trở lên) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI v1.12.1 CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+    <!-- jQuery UI v1.12.1 JS -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Custom styles for Datepicker -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      #datepicker {
+        width: 200px;
+        padding: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Chọn ngày</h1>
+    <input type="text" id="datepicker" placeholder="Chọn ngày" />
+
+    <script>
+      $(document).ready(function () {
+        // Khởi tạo Datepicker với jQuery UI v1.12.1
+        $('#datepicker').datepicker({
+          dateFormat: 'dd-mm-yy', // Định dạng ngày
+          showAnim: 'slideDown', // Hiệu ứng khi hiện lịch
+          minDate: 0, // Ngăn không cho chọn ngày quá khứ
+          maxDate: '+1Y', // Giới hạn chọn tối đa 1 năm sau
+          showButtonPanel: true, // Hiển thị nút Done và Close
+        })
+      })
+    </script>
+  </body>
+</html>
