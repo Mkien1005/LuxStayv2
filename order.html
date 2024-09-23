@@ -130,7 +130,7 @@
                     url: 'https://booking-service-kkos.onrender.com/api/check',
                     dataType:"json",
                     success: function(data){
-                        if(data.payment_status == "Paid") {
+                        if(data.payment_status == "Đã thanh toán") {
                             $("#checkout_box").hide();
                             $("#success_pay_box").show();
                             pay_status = 'Paid';
