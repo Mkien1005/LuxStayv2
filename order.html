@@ -17,6 +17,7 @@
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
               <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
             </svg> Đặt hàng thành công</h1>
+            <h1 id="a">abcd</h1>
             <span class="text-muted"></span>
             <div id="success_pay_box" class="p-2 text-center pt-3 border border-2 mt-5" style="display:none">
                 <h2 class="text-success"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-check-circle text-success" viewBox="0 0 16 16">
@@ -109,6 +110,7 @@
             const orderId = document.querySelector("#order_id")
             const amount = params.get('amount');
             const order_id = params.get('order_id');
+            console.log(order_id);
             idOrder.innerHTML = `Mã đơn hàng #LuxStay${order_id}`
             warning.innerHTML = `Lưu ý: Vui lòng giữ nguyên nội dung chuyển khoản LuxStay${order_id} để hệ thống tự động xác nhận thanh toán`
         let qr = document.querySelector("#qrCheckout")
@@ -119,17 +121,20 @@
             span.innerHTML = formatterVND.format(amount)
         })
       var pay_status = 'Unpaid';
-    
+      
       // Hàm kiểm tra trạng thái đơn hàng
       // Sử dụng Ajax để lấy trạng thái đơn hàng. Nếu thanh toán thành công thì hiển thị Box đã thanh toán thành công, ẩn box checkout
-      function check_payment_status(order_id) {
+      function check_payment_status(orderid) {
           if(pay_status == 'Unpaid') {
                $.ajax({
                     type: "POST",
-                    data: order_id,
+                    data: {
+                        order_id: orderid
+                    },
                     url: 'https://booking-service-kkos.onrender.com/api/check',
                     dataType:"json",
                     success: function(data){
+                        console.log(data.payment_status);
                         if(data.payment_status == "Đã thanh toán") {
                             $("#checkout_box").hide();
                             $("#success_pay_box").show();
