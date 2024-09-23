@@ -10,7 +10,7 @@ module.exports =({ strapi }) =>( {
     const orderId = ctx.request.body.order_id;
 
     // Kiểm tra đơn hàng có tồn tại không
-    const order = await strapi.services.order.findOne({ id: orderId });
+    const order = await strapi.services.booking.findOne({ id: orderId });
 
     if (order) {
       // Trả về kết quả trạng thái đơn hàng dạng JSON
