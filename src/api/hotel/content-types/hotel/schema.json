@@ -34,15 +34,7 @@
       "type": "biginteger"
     },
     "images": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "type": "json"
     }
   }
 }
