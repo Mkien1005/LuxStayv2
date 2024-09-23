@@ -36,7 +36,7 @@ module.exports = {
     await strapi.db.query('api::transaction.transaction').create({ data: transactionData, });
 
     // Tách mã đơn hàng
-    const regex = /DH(\d+)/;
+    const regex = /LuxStay-(\d+)/;
     const matches = transactionContent.match(regex);
     const payOrderId = matches ? matches[1] : null;
 
