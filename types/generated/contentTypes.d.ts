@@ -381,7 +381,7 @@ export interface ApiHotelHotel extends Schema.CollectionType {
     star: Attribute.BigInteger;
     comment: Attribute.Text;
     rooms: Attribute.BigInteger;
-    avatar: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    images: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -418,7 +418,7 @@ export interface ApiRoomRoom extends Schema.CollectionType {
     room_type: Attribute.Enumeration<['VIP Room', 'Standard Room']>;
     price: Attribute.String;
     is_available: Attribute.Enumeration<['Available', 'Unavailable']>;
-    avatar: Attribute.JSON;
+    images: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

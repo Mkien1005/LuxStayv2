@@ -43,7 +43,7 @@
         "Unavailable"
       ]
     },
-    "avatar": {
+    "images": {
       "type": "json"
     }
   }

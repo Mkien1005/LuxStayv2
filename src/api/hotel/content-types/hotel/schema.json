@@ -33,7 +33,7 @@
     "rooms": {
       "type": "biginteger"
     },
-    "avatar": {
+    "images": {
       "type": "media",
       "multiple": false,
       "required": false,
