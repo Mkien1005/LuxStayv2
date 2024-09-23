@@ -23,6 +23,18 @@
     },
     "room_id": {
       "type": "biginteger"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Đã thanh toán",
+        "Chưa thanh toán",
+        "Đã hủy"
+      ],
+      "default": "Chưa thanh toán"
+    },
+    "total": {
+      "type": "decimal"
     }
   }
 }

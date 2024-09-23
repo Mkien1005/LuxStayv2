@@ -378,6 +378,15 @@ export interface ApiBookingBooking extends Schema.CollectionType {
     check_out: Attribute.DateTime;
     user_id: Attribute.BigInteger;
     room_id: Attribute.BigInteger;
+    status: Attribute.Enumeration<
+      [
+        '\u0110\u00E3 thanh to\u00E1n',
+        'Ch\u01B0a thanh to\u00E1n',
+        '\u0110\u00E3 h\u1EE7y'
+      ]
+    > &
+      Attribute.DefaultTo<'Ch\u01B0a thanh to\u00E1n'>;
+    total: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
