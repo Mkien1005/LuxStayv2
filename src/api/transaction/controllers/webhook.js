@@ -19,9 +19,7 @@ module.exports = {
     // Xác định giao dịch tiền vào hay tiền ra
     if (transferType === 'in') amountIn = transferAmount;
     else if (transferType === 'out') amountOut = transferAmount;
-
-    // Tạo bản ghi giao dịch
-    const transaction = await strapi.services.tb_transactions.create({
+    const transactionData = {
       gateway,
       transaction_date: transactionDate,
       account_number: accountNumber,
@@ -33,7 +31,9 @@ module.exports = {
       transaction_content: transactionContent,
       reference_number: referenceCode,
       body,
-    });
+    };
+    // Tạo bản ghi giao dịch
+    await strapi.db.query('api::transaction.transaction').create({ data: transactionData, });
 
     // Tách mã đơn hàng
     const regex = /DH(\d+)/;
@@ -45,10 +45,12 @@ module.exports = {
     }
 
     // Tìm đơn hàng và cập nhật trạng thái
-    const order = await strapi.services.tb_orders.findOne({
-      id: payOrderId,
-      total: amountIn,
-      payment_status: 'Chưa thanh toán',
+    const order = await strapi.db.query('api::booking.booking').findOne({
+      where :{
+        id: payOrderId,
+        total: amountIn,
+        status: 'Chưa thanh toán',
+      }
     });
 
     if (!order) {
@@ -56,9 +58,12 @@ module.exports = {
     }
 
     // Cập nhật trạng thái đơn hàng
-    await strapi.services.tb_orders.update({ id: payOrderId }, { payment_status: 'Đã thanh toán' });
+  await strapi.db.query('api::booking.booking').update({
+    where: { id: payOrderId },
+    data: { status: 'Đã thanh toán' },
+  });
 
     // Trả về kết quả thành công
     ctx.send({ success: true });
   },
-};
+}; 
