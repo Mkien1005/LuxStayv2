@@ -57,7 +57,7 @@
                             </tr>
                              <tr>
                                 <td>Nội dung CK: </td>
-                                <td><b>LuxStay-<span id="order_id"></span></b></td>
+                                <td><b><span id="order_id"></span></b></td>
                             </tr>
                         </tbody>
                     </table>
@@ -109,12 +109,12 @@
             const orderId = document.querySelector("#order_id")
             const amount = params.get('amount');
             const order_id = params.get('order_id');
-            idOrder.innerHTML = `Mã đơn hàng #LuxStay-${order_id}`
-            warning.innerHTML = `Lưu ý: Vui lòng giữ nguyên nội dung chuyển khoản LuxStay-${order_id} để hệ thống tự động xác nhận thanh toán`
+            idOrder.innerHTML = `Mã đơn hàng #LuxStay${order_id}`
+            warning.innerHTML = `Lưu ý: Vui lòng giữ nguyên nội dung chuyển khoản LuxStay${order_id} để hệ thống tự động xác nhận thanh toán`
         let qr = document.querySelector("#qrCheckout")
         qr.src = `https://qr.sepay.vn/img?bank=MBBank&acc=88999915102003&template=compact&amount=${amount}&des=LuxStay${order_id}`
         const formatterVND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
-        orderId.innerHTML = order_id
+        orderId.innerHTML = `LuxStay${order_id}`
         amountSpans.forEach((span)=>{
             span.innerHTML = formatterVND.format(amount)
         })
