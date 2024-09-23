@@ -2,7 +2,7 @@ module.exports = {
     routes: [
       {
         method: 'POST',
-        path: '/check-payment-status',
+        path: '/check',
         handler: 'check.checkStatus',
         config:{
             auth:false,

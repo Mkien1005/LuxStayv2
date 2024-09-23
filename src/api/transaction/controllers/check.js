@@ -8,13 +8,14 @@ module.exports =({ strapi }) =>( {
     }
 
     const orderId = ctx.request.body.order_id;
+    console.log(orderId);
 
     // Kiểm tra đơn hàng có tồn tại không
-    const order = await strapi.services.booking.findOne({ id: orderId });
+    const order = await strapi.db.query('api::booking.booking').findOne({ where: { id: orderId } });
 
     if (order) {
       // Trả về kết quả trạng thái đơn hàng dạng JSON
-      return ctx.send({ payment_status: order.payment_status });
+      return ctx.send({ payment_status: order.status });
     } else {
       // Trả về kết quả không tìm thấy đơn hàng
       return ctx.send({ payment_status: 'order_not_found' });
