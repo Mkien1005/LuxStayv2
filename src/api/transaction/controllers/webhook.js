@@ -36,10 +36,10 @@ module.exports = {
     await strapi.db.query('api::transaction.transaction').create({ data: transactionData, });
 
     // Tách mã đơn hàng
-    const regex = /LuxStay(\d+)/;
+    const regex = /LuxStay(\d+)[^\d]?/;
     const matches = transactionContent.match(regex);
     const payOrderId = matches ? matches[1] : null;
-
+    
     if (!payOrderId || isNaN(payOrderId)) {
       return ctx.badRequest(`Order not found. Order_id ${payOrderId}`);
     }
