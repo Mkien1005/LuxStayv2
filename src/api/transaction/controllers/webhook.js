@@ -1,58 +1,64 @@
-"use strict";
 
-module.exports = ({ strapi }) => ({
+'use strict';
+
+module.exports = {
   async webhook(ctx) {
-    try {
-      // Lấy dữ liệu từ body của request webhook
-      const data = ctx.request.body;
+    // Lấy dữ liệu từ webhook
+    const data = ctx.request.body;
 
-      // Kiểm tra dữ liệu nhận được có hợp lệ hay không
-      if (!data || typeof data !== 'object') {
-        return ctx.badRequest('No data received');
-      }
-
-      // Lấy các giá trị từ dữ liệu Sepay gửi về
-      const gateway = data.gateway;
-      const transactionDate = data.transactionDate;
-      const accountNumber = data.accountNumber;
-      const subAccount = data.subAccount;
-
-      const transferType = data.transferType;
-      const transferAmount = data.transferAmount;
-      const accumulated = data.accumulated;
-
-      const code = data.code;
-      const transactionContent = data.content;
-      const referenceNumber = data.referenceCode;
-      const body = data.description;
-
-      // Xác định loại giao dịch (in hoặc out)
-      const amountIn = transferType === 'in' ? transferAmount : 0;
-      const amountOut = transferType === 'out' ? transferAmount : 0;
-
-      // Tạo đối tượng để lưu vào cơ sở dữ liệu
-      const transaction = {
-        gateway,
-        transaction_date: transactionDate,
-        account_number: accountNumber,
-        sub_account: subAccount,
-        amount_in: amountIn,
-        amount_out: amountOut,
-        accumulated,
-        code,
-        transaction_content: transactionContent,
-        reference_number: referenceNumber,
-        body,
-      };
-
-      // Sử dụng ORM của Strapi để tạo bản ghi mới trong cơ sở dữ liệu
-      await strapi.db.query('api::transaction.transaction').create({ data: transaction });
-
-      // Trả về phản hồi thành công
-      ctx.send({ success: true });
-    } catch (err) {
-      // Xử lý lỗi và trả về phản hồi thất bại
-      ctx.send({ success: false, message: 'Failed to process webhook', error: err.message });
+    if (!data || typeof data !== 'object') {
+      return ctx.badRequest('No data');
     }
+
+    // Khai báo các biến từ dữ liệu
+    const { gateway, transactionDate, accountNumber, subAccount, transferType, transferAmount, accumulated, code, content: transactionContent, referenceCode, description: body } = data;
+
+    let amountIn = 0;
+    let amountOut = 0;
+
+    // Xác định giao dịch tiền vào hay tiền ra
+    if (transferType === 'in') amountIn = transferAmount;
+    else if (transferType === 'out') amountOut = transferAmount;
+
+    // Tạo bản ghi giao dịch
+    const transaction = await strapi.services.tb_transactions.create({
+      gateway,
+      transaction_date: transactionDate,
+      account_number: accountNumber,
+      sub_account: subAccount,
+      amount_in: amountIn,
+      amount_out: amountOut,
+      accumulated,
+      code,
+      transaction_content: transactionContent,
+      reference_number: referenceCode,
+      body,
+    });
+
+    // Tách mã đơn hàng
+    const regex = /DH(\d+)/;
+    const matches = transactionContent.match(regex);
+    const payOrderId = matches ? matches[1] : null;
+
+    if (!payOrderId || isNaN(payOrderId)) {
+      return ctx.badRequest(`Order not found. Order_id ${payOrderId}`);
+    }
+
+    // Tìm đơn hàng và cập nhật trạng thái
+    const order = await strapi.services.tb_orders.findOne({
+      id: payOrderId,
+      total: amountIn,
+      payment_status: 'Chưa thanh toán',
+    });
+
+    if (!order) {
+      return ctx.badRequest(`Order not found. Order_id ${payOrderId}`);
+    }
+
+    // Cập nhật trạng thái đơn hàng
+    await strapi.services.tb_orders.update({ id: payOrderId }, { payment_status: 'Đã thanh toán' });
+
+    // Trả về kết quả thành công
+    ctx.send({ success: true });
   },
-});
+};
