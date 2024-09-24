@@ -3,10 +3,8 @@ package com.moclai.identityservice.controller;
 import java.text.ParseException;
 
 import com.moclai.identityservice.dto.request.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.moclai.identityservice.dto.response.GetUsernameResponse;
+import org.springframework.web.bind.annotation.*;
 
 import com.moclai.identityservice.dto.response.AuthenticationResponse;
 import com.moclai.identityservice.dto.response.IntrospectResponse;
@@ -49,4 +47,10 @@ public class AuthenticationController {
         authenticationService.logout(request);
         return ApiResponse.<Void>builder().build();
     }
+    @PostMapping("/getUsername")
+    ApiResponse<GetUsernameResponse> getUsername(@RequestBody GetUsernameRequest request) throws ParseException, JOSEException{
+        var username = authenticationService.getUsername(request);
+        return ApiResponse.<GetUsernameResponse>builder().result(username).build();
+    }
+
 }

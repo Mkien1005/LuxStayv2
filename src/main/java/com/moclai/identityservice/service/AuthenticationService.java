@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.StringJoiner;
 import java.util.UUID;
 
+import com.moclai.identityservice.dto.request.*;
+import com.moclai.identityservice.dto.response.GetUsernameResponse;
 import com.moclai.identityservice.exception.AppException;
 import com.moclai.identityservice.exception.ErrorCode;
 import com.moclai.identityservice.repository.InvalidatedTokenRepository;
@@ -17,10 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.moclai.identityservice.dto.request.AuthenticationRequest;
-import com.moclai.identityservice.dto.request.IntrospectRequest;
-import com.moclai.identityservice.dto.request.LogoutRequest;
-import com.moclai.identityservice.dto.request.RefreshRequest;
 import com.moclai.identityservice.dto.response.AuthenticationResponse;
 import com.moclai.identityservice.dto.response.IntrospectResponse;
 import com.moclai.identityservice.entity.InvalidatedToken;
@@ -69,7 +67,19 @@ public class AuthenticationService {
 
         return IntrospectResponse.builder().valid(isValid).build();
     }
+    public GetUsernameResponse getUsername(GetUsernameRequest request) throws JOSEException, ParseException {
+        var token = request.getToken();
+        JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
 
+        SignedJWT signedJWT = SignedJWT.parse(token);
+        if (!signedJWT.verify(verifier)) {
+            GetUsernameResponse.builder().username("Token is invalid")
+                    .build();
+        }
+        JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
+        return GetUsernameResponse.builder().username(claims.getSubject())
+              .build();
+    }
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         var user = userRepository
@@ -127,7 +137,7 @@ public class AuthenticationService {
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(user.getUsername())
-                .issuer("devteria.com")
+                .issuer("moclai.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(
                         Instant.now().plus(VALID_DURATION, ChronoUnit.SECONDS).toEpochMilli()))
