@@ -63,16 +63,18 @@ checkBtn.addEventListener('click', (e) => {
     fetch(`https://api-gateway-5p4v.onrender.com/api/rooms/${id}`)
       .then((response) => response.json())
       .then(async (data) => {
-        await fetch('https://api-gateway-5p4v.onrender.com/api/booking/', {
+        await fetch('https://api-gateway-5p4v.onrender.com/api/bookings/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            checkIn: checkInDate,
-            checkOut: checkOutDate,
-            user_id: 1,
-            room_id: id,
+            data: {
+              check_in: checkInDate,
+              check_out: checkOutDate,
+              user_id: 1,
+              room_id: id,
+            },
           }),
         })
           .then((response) => response.json())
@@ -82,7 +84,7 @@ checkBtn.addEventListener('click', (e) => {
               let idBooking = booking.data.id
               const room = data.data.attributes
               if (isRoomAvailable(room, checkInDate, checkOutDate)) {
-                let price = room.price.value
+                var price = room.price.value
                 if (rooms > 1) {
                   price = price * rooms
                 }
@@ -104,27 +106,32 @@ checkBtn.addEventListener('click', (e) => {
                 // Tạo phần tử Room
                 const roomInfo = document.createElement('p')
                 roomInfo.textContent = `Room: ${rooms}`
-
+                const checkIn = document.createElement('p')
+                checkIn.textContent = `Check in: ${checkin}`
+                const checkOut = document.createElement('p')
+                checkOut.textContent = `Check out: ${checkout}`
                 // Tạo input giá
                 const priceInput = document.createElement('p')
-                priceInput.textContent = `Price: ${price}`
+                priceInput.textContent = `Price: ${price} VNĐ`
 
                 // Tạo nút Đặt ngay
                 const bookButton = document.createElement('a')
                 bookButton.classList.add('select-button', 'book-now')
-                bookButton.textContent = 'Đặt ngay'
+                bookButton.textContent = 'Booking now'
                 bookButton.style.right = '40px'
                 bookButton.style.position = 'absolute'
                 bookButton.setAttribute('href', `order.html?amount=${price}&order_id=${idBooking}`)
                 // Tạo nút Quay lại
                 const backButton = document.createElement('a')
                 backButton.classList.add('select-button', 'back')
-                backButton.textContent = 'Quay lại'
+                backButton.textContent = 'Back'
 
                 // Thêm các phần tử vào messageBox
                 messageBox.appendChild(heading)
                 messageBox.appendChild(guestInfo)
                 messageBox.appendChild(roomInfo)
+                messageBox.appendChild(checkIn)
+                messageBox.appendChild(checkOut)
                 messageBox.appendChild(priceInput)
                 messageBox.appendChild(bookButton)
                 messageBox.appendChild(backButton)
@@ -134,6 +141,17 @@ checkBtn.addEventListener('click', (e) => {
 
                 // Thêm overlay vào body của trang
                 document.body.appendChild(overlay)
+                let messageOverlay = document.querySelector('.message-overlay')
+                let back = document.querySelector('.back')
+                back.addEventListener('click', async () => {
+                  messageOverlay.classList.remove('active')
+                  await fetch(`https://api-gateway-5p4v.onrender.com/api/bookings/${idBooking}`, {
+                    method: 'DELETE',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                  })
+                })
               } else {
                 Swal.fire({
                   icon: 'error',
@@ -169,12 +187,3 @@ function isRoomAvailable(room, checkInDate, checkOutDate) {
     return bookingCheckIn <= new Date(checkOutDate) && bookingCheckOut >= new Date(checkInDate)
   })
 }
-let messageOverlay = document.querySelector('.message-overlay')
-let back = document.querySelector('.back')
-back.addEventListener('click', () => {
-  messageOverlay.classList.remove('active')
-})
-let bookNow = document.querySelector('.book-now')
-bookNow.addEventListener('click', () => {
-  messageOverlay.classList.remove('active')
-})
