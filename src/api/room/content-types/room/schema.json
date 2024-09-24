@@ -33,9 +33,6 @@
         "Standard Room"
       ]
     },
-    "price": {
-      "type": "string"
-    },
     "is_available": {
       "type": "enumeration",
       "enum": [
@@ -47,6 +44,9 @@
       "type": "json"
     },
     "checkdate": {
+      "type": "json"
+    },
+    "price": {
       "type": "json"
     }
   }
