@@ -4,7 +4,6 @@ const token = localStorage.getItem('token');
 // Kiểm tra xem token có tồn tại không
 if (!token) {
     console.error("Token không tồn tại trong localStorage.");
-    alert("Bạn cần đăng nhập để tiếp tục.");
 } else {
     // Tạo đối tượng payload cho yêu cầu
     const loginData = {
