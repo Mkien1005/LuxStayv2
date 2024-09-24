@@ -52,8 +52,8 @@ function register() {
     const registerData = {
         username: username,
         password: password,
-        fristname: fristname,
-        lastname: lastname,
+        fristName: fristname,
+        lastName: lastname,
         dob: dob
     };
 
@@ -67,14 +67,18 @@ function register() {
     .then(response => {
         if (response.ok) {
             // Đăng ký thành công, gửi yêu cầu đăng nhập ngay sau đó
-            return response.json(); // Hoặc đơn giản trả về thành công mà không cần dữ liệu
+            alert("Đăng ký thành công");
+            window.location.href = "../auth/login.html";
         } else {
-            return response.text().then(text => {throw new Error(text)});
+            return response.json().then(data => {
+                // Kiểm tra nếu có message trong phản hồi
+                if (data && data.message) {
+                    alert(data.message); // Hiển thị thông báo lỗi từ server
+                } else {
+                    alert("Có lỗi xảy ra, vui lòng thử lại."); // Thông báo mặc định khi không có message cụ thể
+                }
+            });
         }
-    })
-    .then(() => {
-        // Đăng nhập sau khi đăng ký thành công
-        return login(); // Lưu ý: hàm login cần thông tin username và password, có thể cần điều chỉnh
     })
     .catch(error => {
         console.error('Error:', error);
