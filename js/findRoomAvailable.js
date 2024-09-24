@@ -63,6 +63,12 @@ checkBtn.addEventListener('click', (e) => {
     fetch(`https://api-gateway-5p4v.onrender.com/api/rooms/${id}`)
       .then((response) => response.json())
       .then(async (data) => {
+        const room = data.data.attributes
+        let day = calculateDaysBetween(checkInDate, checkOutDate)
+        var price = room.price.value * day
+        if (rooms > 1) {
+          price = price * rooms
+        }
         await fetch('https://api-gateway-5p4v.onrender.com/api/bookings/', {
           method: 'POST',
           headers: {
@@ -74,6 +80,7 @@ checkBtn.addEventListener('click', (e) => {
               check_out: checkOutDate,
               user_id: 1,
               room_id: id,
+              total: price,
             },
           }),
         })
@@ -82,12 +89,7 @@ checkBtn.addEventListener('click', (e) => {
             console.log('Data:', booking)
             if (booking.data) {
               let idBooking = booking.data.id
-              const room = data.data.attributes
               if (isRoomAvailable(room, checkInDate, checkOutDate)) {
-                var price = room.price.value
-                if (rooms > 1) {
-                  price = price * rooms
-                }
                 // Tạo overlay
                 const overlay = document.createElement('div')
                 overlay.classList.add('message-overlay', 'active')
@@ -186,4 +188,19 @@ function isRoomAvailable(room, checkInDate, checkOutDate) {
     const bookingCheckOut = new Date(booking.checkOutDate)
     return bookingCheckIn <= new Date(checkOutDate) && bookingCheckOut >= new Date(checkInDate)
   })
+}
+function calculateDaysBetween(checkIn, checkOut) {
+  // Ngày cụ thể truyền vào dưới dạng chuỗi
+  let checkin = new Date(checkIn)
+
+  // Ngày hiện tại
+  let checkout = new Date(checkOut)
+
+  // Tính sự khác biệt về thời gian (milliseconds)
+  let timeDifference = checkout - checkin
+
+  // Chuyển đổi sự khác biệt thời gian từ milliseconds thành số ngày
+  let dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+
+  return dayDifference
 }
