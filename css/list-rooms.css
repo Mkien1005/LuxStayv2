@@ -10,6 +10,7 @@ html {
     max-width: 100%;
     font-family: Arial, sans-serif;
     padding: 5px;
+    margin-bottom: 10px;
 }
 
 .room-card:hover {

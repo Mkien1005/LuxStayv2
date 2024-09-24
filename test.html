@@ -6,9 +6,9 @@
   </head>
   <body>
     <h1>Chọn ngày</h1>
-    <input type="file" id="datepicker1" placeholder="Chọn" />
-    <input type="file" id="datepicker2" placeholder="Chọn" />
-    <input type="file" id="datepicker3" placeholder="Chọn" />
+    <input type="file" id="d1" placeholder="Chọn" />
+    <input type="file" id="d2" placeholder="Chọn" />
+    <input type="file" id="d3" placeholder="Chọn" />
     <button id="post">Gửi</button>
     <script>
       let post = document.querySelector('#post')
@@ -18,25 +18,25 @@
         // Dữ liệu JSON (không bao gồm images)
         const data = {
           comment: 'abc',
-          rating: 5,
-          status: 'active',
-          user_id: 1,
-          room_id: 1,
-          likes: 0,
+          star: 5,
+          address: 'active',
+          email: 'abc@gmail.com',
+          name: 'HH',
+          rooms: 10,
+          phone_number: '092876131',
         }
 
         // Append dữ liệu JSON vào FormData
         formData.append('data', JSON.stringify(data))
 
         // Append multiple images (file input)
-        const imageFiles = document.querySelectorAll('input[type="file"]')
-        console.log('object :>> ', imageFiles[0])
-        const file = []
-        for (let i = 0; i < imageFiles.length; i++) {
-          file[i] = imageFiles[i].files
-        }
-        console.log('object :>> ', file)
-        formData.append('files.images', file)
+        const d1 = document.querySelector('#d1').files[0]
+        const d2 = document.querySelector('#d2').files[0]
+        const d3 = document.querySelector('#d3').files[0]
+        console.log('object :>> ', d1, d2, d3)
+        formData.append('files.images', d1)
+        formData.append('files.images', d2)
+        formData.append('files.images', d3)
         formData.forEach((value, key) => {
           console.log(key, value)
         })
