@@ -433,12 +433,12 @@
         <form action="#">
           <div class="check-date">
             <label for="date-in">Check In:</label>
-            <input type="text" class="date-input hasDatepicker" id="date-in" readonly />
+            <input type="text" class="date-input" placeholder="Chọn ngày" id="date-in" readonly />
             <i class="icon_calendar"></i>
           </div>
           <div class="check-date">
             <label for="date-out">Check Out:</label>
-            <input type="text" class="date-input hasDatepicker" id="date-out" readonly />
+            <input type="text" class="date-input" placeholder="Chọn ngày" id="date-out" readonly />
             <i class="icon_calendar"></i>
           </div>
           <div class="select-option">
@@ -465,11 +465,12 @@
               </ul>
             </div>
           </div>
-          <button type="submit">Check Availability</button>
+          <button type="submit" id="checkAvailable">Check Availability</button>
         </form>
       </div>
     </div>
     <!-- Js Plugins -->
+    <script src="js/findRoomAvailable.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>

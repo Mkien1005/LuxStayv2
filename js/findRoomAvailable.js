@@ -1,31 +1,31 @@
 const checkBtn = document.querySelector('#checkAvailable')
 checkBtn.addEventListener('click', (e) => {
   e.preventDefault()
+
   const checkinDate = document.querySelector('#date-in').value
   const checkoutDate = document.querySelector('#date-out').value
-  const checkIn = new Date(checkinDate)
-  const checkOut = new Date(checkoutDate)
-  if (checkIn == 'Invalid Date') {
-    alert('Please choose check in day!')
+
+  // Kiểm tra ngày checkin
+  if (checkinDate === 'Invalid Date' || !checkinDate) {
+    alert('Please choose a check-in day!')
     return
   }
-  if (checkOut == 'Invalid Date') {
-    alert('Please choose check out day!')
+
+  // Kiểm tra ngày checkout
+  if (checkoutDate === 'Invalid Date' || !checkoutDate) {
+    alert('Please choose a check-out day!')
     return
   }
-  // Định dạng ngày theo chuẩn ISO hoặc chuẩn YYYY-MM-DD
-  const formattedCheckIn = formatDateToYYYYMMDD(checkIn) // "2024-09-24"
-  const formattedCheckOut = formatDateToYYYYMMDD(checkOut) // "2024-09-25"
-  console.log(formattedCheckIn, '/', formattedCheckOut)
+
+  // Chuyển đổi các chuỗi ngày thành đối tượng Date
+  const checkin = new Date(checkinDate.split('-').reverse().join('-')) // Định dạng dd-mm-yyyy
+  const checkout = new Date(checkoutDate.split('-').reverse().join('-'))
+
+  // Kiểm tra xem ngày checkout có sau ngày checkin không
+  if (checkout <= checkin) {
+    alert('Check-out date must be after check-in date!')
+    return
+  }
+
+  console.log(checkinDate, '/', checkoutDate)
 })
-function formatDateToYYYYMMDD(dateStr) {
-  const date = new Date(dateStr)
-
-  // Lấy từng thành phần của ngày
-  const year = date.getFullYear()
-  const month = ('0' + (date.getMonth() + 1)).slice(-2) // getMonth() trả về từ 0-11, nên cần +1
-  const day = ('0' + date.getDate()).slice(-2) // getDate() trả về ngày
-
-  // Kết hợp lại thành chuỗi YYYY-MM-DD
-  return `${year}-${month}-${day}`
-}
