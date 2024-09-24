@@ -419,6 +419,7 @@ export interface ApiRoomRoom extends Schema.CollectionType {
     price: Attribute.String;
     is_available: Attribute.Enumeration<['Available', 'Unavailable']>;
     images: Attribute.JSON;
+    checkdate: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

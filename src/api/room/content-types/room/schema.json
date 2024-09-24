@@ -45,6 +45,9 @@
     },
     "images": {
       "type": "json"
+    },
+    "checkdate": {
+      "type": "json"
     }
   }
 }
