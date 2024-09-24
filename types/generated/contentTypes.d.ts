@@ -381,7 +381,7 @@ export interface ApiHotelHotel extends Schema.CollectionType {
     star: Attribute.BigInteger;
     comment: Attribute.Text;
     rooms: Attribute.BigInteger;
-    images: Attribute.JSON;
+    images: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
