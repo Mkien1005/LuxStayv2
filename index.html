@@ -44,16 +44,9 @@
         <i class="icon_search"></i>
       </div>
       <div class="header-configure-area">
-        <div class="language-option">
-          <img src="img/flag.jpg" alt="" />
-          <span>EN <i class="fa fa-angle-down"></i></span>
-          <div class="flag-dropdown">
-            <ul>
-              <li><a href="#">Zi</a></li>
-              <li><a href="#">Fr</a></li>
-            </ul>
-          </div>
-        </div>
+        
+        
+        
         <a href="#" class="bk-btn">Booking Now</a>
       </div>
       <nav class="mainmenu mobile-menu">
@@ -110,14 +103,15 @@
                 <a href="#" class="bk-btn">Booking Now</a>
                 <div class="language-option">
                   <img src="img/flag.jpg" alt="" />
-                  <span>EN <i class="fa fa-angle-down"></i></span>
-                  <div class="flag-dropdown">
-                    <ul>
-                      <li><a href="#">Zi</a></li>
-                      <li><a href="#">Fr</a></li>
+                  <span id="userStatus">Account <i class="fa fa-angle-down"></i></span>
+                  <div class="flag-dropdown" id="dropdownMenu">
+                    <ul id="dropdownList">
+                      <li><a href="auth/login.html">Login</a></li>
+                      <li><a href="auth/register.html">Register</a></li>
                     </ul>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -661,5 +655,6 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/getHotel.js"></script>
+    <script src="js/auth.js"></script>
   </body>
 </html>
