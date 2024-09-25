@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/search-form.css" type="text/css" />
   </head>
 
   <body>
@@ -166,11 +167,45 @@
 
     <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section">
+      <div class="hotel-search-form">
+        <div class="recently-viewed">Choose option to find your hotel you want</div>
+        <div class="form-group" style="width: 100%">
+          <label>City, location or hotel name:</label>
+          <input type="text" placeholder="Nha Trang" style="width: 100%" />
+        </div>
+        <div class="form-group" style="width: 35%">
+          <div class="form-group" style="width: 100%">
+            <label>Check in:</label>
+            <input type="date" value="2024-09-26" style="width: 100%" />
+          </div>
+          <div class="form-group" style="width: 100%">
+            <label>Check out:</label>
+            <input type="date" value="2024-10-24" style="width: 100%" />
+          </div>
+        </div>
+        <div class="form-group" style="width: 35%">
+          <div class="form-group" style="width: 100%">
+            <label>Guests</label>
+            <select style="width: 100%">
+              <option>3 người lớn, 1 trẻ em, 1 phòng</option>
+            </select>
+          </div>
+          <div class="form-group" style="width: 100%">
+            <label>Rooms</label>
+            <select style="width: 100%">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
+          </div>
+        </div>
+        <button class="search-button" style="position: absolute"><i class="fa fa-search" aria-hidden="true"></i> Find a hotel</button>
+      </div>
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb-text">
-              <h2>Our Rooms</h2>
+              <h2>Our Hotels</h2>
               <div class="bt-option">
                 <a href="./index.html">Home</a>
                 <span>Hotels</span>
