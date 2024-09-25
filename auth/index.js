@@ -30,15 +30,24 @@ function login() {
           timer: 1500,
         })
         // Chuyển hướng và truyền username qua URL
-        window.location.href = '../index.html'
+        setTimeout(() => {
+          window.location.href = '../index.html'
+        }, 1500)
       } else {
         // Hiển thị thông báo lỗi từ phản hồi
-        document.getElementById('error-message').textContent = data.message || 'Login failed'
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Log in fail!',
+        })
       }
     })
     .catch((error) => {
-      console.error('Error:', error)
-      document.getElementById('error-message').textContent = 'An error occurred. Please try again later.'
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Server internal!',
+      })
     })
 }
 function register() {
@@ -93,6 +102,5 @@ function register() {
     })
     .catch((error) => {
       console.error('Error:', error)
-      document.getElementById('message').textContent = 'Registration failed: ' + error.message
     })
 }
