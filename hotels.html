@@ -170,8 +170,8 @@
       <div class="hotel-search-form">
         <div class="recently-viewed">Choose option to find your hotel you want</div>
         <div class="form-group" style="width: 100%">
-          <label>City, location or hotel name:</label>
-          <input type="text" placeholder="Nha Trang" style="width: 100%" />
+          <label for="search-hotel">City, location or hotel name:</label>
+          <input type="text" placeholder="Nha Trang" id="search-hotel" style="width: 100%" />
         </div>
         <div class="form-group" style="width: 35%">
           <div class="form-group check-date" style="width: 100%">
@@ -205,7 +205,9 @@
             </select>
           </div>
         </div>
-        <button class="search-button" style="position: absolute"><i class="fa fa-search" aria-hidden="true"></i> Find a hotel</button>
+        <button class="search-button" onclick="searchHotel()" style="position: absolute">
+          <i class="fa fa-search" aria-hidden="true"></i> Find a hotel
+        </button>
       </div>
       <div class="container">
         <div class="row">
@@ -226,7 +228,7 @@
     <!-- Rooms Section Begin -->
     <section class="rooms-section spad">
       <div class="container">
-        <div class="row">
+        <div class="row" id="hotel-list">
           <div class="col-lg-4 col-md-6">
             <div class="room-item">
               <img src="img/room/room-1.jpg" alt="" />
@@ -510,6 +512,7 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+    <script src="js/findHotel.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
