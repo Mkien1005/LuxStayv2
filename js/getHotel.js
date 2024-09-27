@@ -1,3 +1,4 @@
+document.cookie = 'cas=asascascasggf; expires=expirationDate; path=path'
 const hotelId = getHotelIdFromUrl()
 fetch(`https://mkienfs.id.vn/api/hotels/${hotelId}`)
   .then((response) => response.json())
