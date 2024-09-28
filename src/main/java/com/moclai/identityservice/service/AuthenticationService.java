@@ -83,8 +83,8 @@ public class AuthenticationService {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         var user = userRepository
-                .findByUsername(request.getUsername())
-                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+                .findByEmail(request.getEmail())
+                .orElseThrow(() -> new AppException(ErrorCode.EMAIL_EXISTED));
 
         boolean authenticated = passwordEncoder.matches(request.getPassword(), user.getPassword());
 
@@ -137,6 +137,7 @@ public class AuthenticationService {
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(user.getUsername())
+                .claim("email",user.getEmail())
                 .issuer("moclai.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(
