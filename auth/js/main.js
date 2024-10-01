@@ -2,15 +2,15 @@
 let loginBtn = document.querySelector(".login-button")
 loginBtn.addEventListener("click",(e)=>{
     e.preventDefault()
-        const username = document.getElementById('email').value;
+        const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        if (!username || !password) {
-            document.getElementById('error-message').textContent = "Please enter both username and password";
+        if (!email || !password) {
+            document.getElementById('error-message').textContent = "Please enter both email and password";
             return;
         }
     
         const loginData = {
-            username: username,
+            email: email,
             password: password
         };
     
