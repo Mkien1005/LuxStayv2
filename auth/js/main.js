@@ -14,7 +14,7 @@ loginBtn.addEventListener("click",(e)=>{
             password: password
         };
     
-        fetch('https://identity-service-qboe.onrender.com/identity/auth/token', {
+        fetch('https://api-gateway-5p4v.onrender.com/identity/auth/token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ function register() {
         dob: dob
     };
 
-    fetch('https://identity-service-qboe.onrender.com/identity/users', {
+    fetch('https://api-gateway-5p4v.onrender.com/identity/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

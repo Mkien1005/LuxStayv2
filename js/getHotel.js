@@ -150,7 +150,7 @@ function like(likeButton) {
   parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
   // Gửi yêu cầu fetch để cập nhật ở phía server
-  fetch(`https://mkienfs.id.vn/api/reviews/${idReview}`, {
+  fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ function unlike(likedButton) {
   parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
   // Gửi yêu cầu fetch để cập nhật ở phía server
-  fetch(`https://mkienfs.id.vn/api/reviews/${idReview}`, {
+  fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

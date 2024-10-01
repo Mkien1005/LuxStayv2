@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
           likes: 0,
         }
         // Gửi dữ liệu đánh giá
-        fetch('https://mkienfs.id.vn/api/reviews/', {
+        fetch('https://api-gateway-5p4v.onrender.com/api/reviews/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
     parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
     // Gửi yêu cầu fetch để cập nhật ở phía server
-    fetch(`https://mkienfs.id.vn/api/reviews/${idReview}`, {
+    fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
     parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
     // Gửi yêu cầu fetch để cập nhật ở phía server
-    fetch(`https://mkienfs.id.vn/api/reviews/${idReview}`, {
+    fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
