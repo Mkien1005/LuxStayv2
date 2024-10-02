@@ -1,4 +1,6 @@
 fetch('https://api-gateway-5p4v.onrender.com/api/hotels',{
+    method: 'GET',
+    credentials: 'include',
     headers: {
         'Content-Type': 'application/json',
     }
