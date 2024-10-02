@@ -400,36 +400,6 @@ export interface ApiHotelHotel extends Schema.CollectionType {
   };
 }
 
-export interface ApiRoomRoom extends Schema.CollectionType {
-  collectionName: 'rooms';
-  info: {
-    singularName: 'room';
-    pluralName: 'rooms';
-    displayName: 'Room';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    room_name: Attribute.String;
-    hotel_id: Attribute.BigInteger;
-    capacity: Attribute.Enumeration<['Single', 'Couple', 'Family']>;
-    room_type: Attribute.Enumeration<['VIP Room', 'Standard Room']>;
-    is_available: Attribute.Enumeration<['Available', 'Unavailable']>;
-    images: Attribute.JSON;
-    checkdate: Attribute.JSON;
-    price: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::room.room', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::room.room', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -867,7 +837,6 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::hotel.hotel': ApiHotelHotel;
-      'api::room.room': ApiRoomRoom;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
