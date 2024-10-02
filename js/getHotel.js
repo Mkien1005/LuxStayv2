@@ -2,19 +2,33 @@ const hotelId = getHotelIdFromUrl()
 fetch(`https://luxstayv2.onrender.com/api/hotels/${hotelId}`)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data.data)
+    renderHotel(data.data)
   })
   .catch((error) => {
     console.error('Error:', error)
   })
 function getHotelIdFromUrl() {
   const params = new URLSearchParams(window.location.search)
-  return params.get('hotel_id') // Lấy giá trị của param room_id
+  return parseInt(params.get('hotel_id'))
+}
+function renderHotel(hotel) {
+  console.log('hotel', hotel)
+  const hotelImage = document.querySelector('.hotel-image')
+  hotelImage.src = hotel.attributes.images[0].url
+  const hotelName = document.querySelector('#hotel-name')
+  hotelName.textContent = hotel.attributes.name
+  const hotelStar = document.querySelector('.hotel-star')
+  let star = parseInt(hotel.attributes.star)
+  hotelStar.innerHTML = '<i class="fa fa-star"></i>'.repeat(star) + '<i class="fa fa-star-o"></i>'.repeat(5 - star)
 }
 // Hàm fetch dữ liệu room và review
 async function fetchRoomAndReviews(hotelId) {
   if (!hotelId) {
-    console.error('Room ID không hợp lệ.')
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Không tìm thấy khách sạn này!',
+    })
     return
   }
   try {
