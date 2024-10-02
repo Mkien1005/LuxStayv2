@@ -60,7 +60,7 @@ checkBtn.addEventListener('click', (e) => {
   overlay.classList.remove('active')
   const id = roomBooking.id
   try {
-    fetch(`https://api-gateway-5p4v.onrender.com/api/rooms/${id}`)
+    fetch(`https://luxstayv2.onrender.com/api/rooms/${id}`)
       .then((response) => response.json())
       .then(async (data) => {
         const room = data.data.attributes
@@ -69,7 +69,7 @@ checkBtn.addEventListener('click', (e) => {
         if (rooms > 1) {
           price = price * rooms
         }
-        await fetch('https://api-gateway-5p4v.onrender.com/api/bookings/', {
+        await fetch('https://luxstayv2.onrender.com/api/bookings/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ checkBtn.addEventListener('click', (e) => {
                 let back = document.querySelector('.back')
                 back.addEventListener('click', async () => {
                   messageOverlay.classList.remove('active')
-                  await fetch(`https://api-gateway-5p4v.onrender.com/api/bookings/${idBooking}`, {
+                  await fetch(`https://luxstayv2.onrender.com/api/bookings/${idBooking}`, {
                     method: 'DELETE',
                     headers: {
                       'Content-Type': 'application/json',

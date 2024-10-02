@@ -9,7 +9,7 @@ async function fetchRoomAndReviews() {
     console.error('Room ID không hợp lệ.')
     return
   }
-  fetch('https://api-gateway-5p4v.onrender.com/api/reviews/', {
+  fetch('https://luxstayv2.onrender.com/api/reviews/', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ async function fetchRoomAndReviews() {
     })
   try {
     // Fetch room theo room_id
-    const roomResponse = await fetch(`https://api-gateway-5p4v.onrender.com/api/rooms/${roomId}`, {
+    const roomResponse = await fetch(`https://luxstayv2.onrender.com/api/rooms/${roomId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ async function fetchRoomAndReviews() {
     console.log('Room Data:', roomData) // In thông tin room ra console
 
     // Fetch reviews liên quan đến room_id
-    const reviewsResponse = await fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/?filters[room_id][$eq]=${roomId}`, {
+    const reviewsResponse = await fetch(`https://luxstayv2.onrender.com/api/reviews/?filters[room_id][$eq]=${roomId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ function like(likeButton) {
   parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
   // Gửi yêu cầu fetch để cập nhật ở phía server
-  fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
+  fetch(`https://luxstayv2.onrender.com/api/reviews/${idReview}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ function unlike(likedButton) {
   parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
   // Gửi yêu cầu fetch để cập nhật ở phía server
-  fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
+  fetch(`https://luxstayv2.onrender.com/api/reviews/${idReview}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

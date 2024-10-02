@@ -11,7 +11,7 @@ if (!token) {
   }
 
   // Gửi yêu cầu fetch tới API
-  fetch('https://api-gateway-5p4v.onrender.com/identity/auth/getUsername', {
+  fetch('https://luxstayv2.onrender.com/identity/auth/getUsername', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json', // Định dạng dữ liệu gửi

@@ -4,7 +4,7 @@ function searchHotel() {
   // Kiểm tra nếu người dùng nhập gì đó
   if (searchValue) {
     // Tạo query cho API
-    const query = `https://api-gateway-5p4v.onrender.com/api/hotels/?filters[$or][0][name][$contains]=${searchValue}&filters[$or][1][address][$contains]=${searchValue}`
+    const query = `https://luxstayv2.onrender.com/api/hotels/?filters[$or][0][name][$contains]=${searchValue}&filters[$or][1][address][$contains]=${searchValue}`
     const hotelList = document.getElementById('hotel-list')
     hotelList.innerHTML = ''
     // Gọi API
@@ -65,7 +65,7 @@ function renderHotel(hotel) {
       </div>
     </div>
     `
-  
+
   // Thêm HTML vừa tạo vào div
   hotelList.innerHTML += hotelHTML
 }

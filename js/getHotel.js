@@ -1,5 +1,5 @@
 const hotelId = getHotelIdFromUrl()
-fetch(`https://api-gateway-5p4v.onrender.com/api/hotels/${hotelId}`)
+fetch(`https://luxstayv2.onrender.com/api/hotels/${hotelId}`)
   .then((response) => response.json())
   .then((data) => {
     console.log(data.data)
@@ -19,7 +19,7 @@ async function fetchRoomAndReviews(hotelId) {
   }
   try {
     // Fetch room theo room_id
-    const roomResponse = await fetch(`https://api-gateway-5p4v.onrender.com/api/rooms/?filters[hotel_id][$eq]=${hotelId}`, {
+    const roomResponse = await fetch(`https://luxstayv2.onrender.com/api/rooms/?filters[hotel_id][$eq]=${hotelId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ async function fetchRoomAndReviews(hotelId) {
     console.log('Room Data:', roomData) // In thông tin room ra console
 
     // Fetch reviews liên quan đến room_id
-    const reviewsResponse = await fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/?filters[hotel_id][$eq]=${hotelId}`, {
+    const reviewsResponse = await fetch(`https://luxstayv2.onrender.com/api/reviews/?filters[hotel_id][$eq]=${hotelId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ function like(likeButton) {
   parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
   // Gửi yêu cầu fetch để cập nhật ở phía server
-  fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
+  fetch(`https://luxstayv2.onrender.com/api/reviews/${idReview}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ function unlike(likedButton) {
   parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
   // Gửi yêu cầu fetch để cập nhật ở phía server
-  fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
+  fetch(`https://luxstayv2.onrender.com/api/reviews/${idReview}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

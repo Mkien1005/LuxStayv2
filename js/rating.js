@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
           likes: 0,
         }
         // Gửi dữ liệu đánh giá
-        fetch('https://api-gateway-5p4v.onrender.com/api/reviews/', {
+        fetch('https://luxstayv2.onrender.com/api/reviews/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -191,7 +191,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 <h5>Người dùng</h5>
                 <p>${reviewText}</p>
                 <div class="review-images">
-                  ${imageUrls.map((url) => `<img src="http://localhost:1337${url}" style="width: 175px" alt="Review Image" />`).join('')}
+                  ${imageUrls
+                    .map(
+                      (url) =>
+                        `<img src="https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg" style="width: 175px" alt="Review Image" />`
+                    )
+                    .join('')}
                 </div>
               </div>
             `
@@ -269,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
     parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
     // Gửi yêu cầu fetch để cập nhật ở phía server
-    fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
+    fetch(`https://luxstayv2.onrender.com/api/reviews/${idReview}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -307,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
     parentDiv.querySelector('.likeCount').innerHTML = newLikeCount
 
     // Gửi yêu cầu fetch để cập nhật ở phía server
-    fetch(`https://api-gateway-5p4v.onrender.com/api/reviews/${idReview}`, {
+    fetch(`https://luxstayv2.onrender.com/api/reviews/${idReview}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

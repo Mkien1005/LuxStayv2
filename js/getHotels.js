@@ -1,9 +1,9 @@
-fetch('https://api-gateway-5p4v.onrender.com/api/hotels',{
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-        'Content-Type': 'application/json',
-    }
+fetch('https://luxstayv2.onrender.com/api/hotels', {
+  method: 'GET',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
   .then((response) => response.json())
   .then((data) => {
@@ -11,19 +11,18 @@ fetch('https://api-gateway-5p4v.onrender.com/api/hotels',{
     console.log('first', data)
     data.data.forEach((hotel) => renderHotel(hotel))
     if (hotelList.innerHTML === '') {
-        hotelList.innerHTML = '<p>Không tìm thấy khách sạn nào!</p>'
+      hotelList.innerHTML = '<p>Không tìm thấy khách sạn nào!</p>'
     }
   })
   .catch((error) => {
     const hotelList = document.getElementById('hotel-list')
     hotelList.innerHTML = '<p>Không tìm thấy khách sạn nào!</p>'
-    
   })
-  function renderHotel(hotel) {
-    const hotelList = document.getElementById('hotel-list')
-  
-    // Tạo HTML cho từng khách sạn
-    const hotelHTML = `
+function renderHotel(hotel) {
+  const hotelList = document.getElementById('hotel-list')
+
+  // Tạo HTML cho từng khách sạn
+  const hotelHTML = `
     <div class="col-lg-4 col-md-6">
         <div class="room-item">
           <img src="img/room/room-1.jpg" alt="${hotel.attributes.name}" />
@@ -51,8 +50,7 @@ fetch('https://api-gateway-5p4v.onrender.com/api/hotels',{
         </div>
       </div>
       `
-    
-    // Thêm HTML vừa tạo vào div
-    hotelList.innerHTML += hotelHTML
-  }
-  
+
+  // Thêm HTML vừa tạo vào div
+  hotelList.innerHTML += hotelHTML
+}
