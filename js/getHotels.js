@@ -1,10 +1,4 @@
-fetch('https://luxstayv2.onrender.com/api/hotels', {
-  method: 'GET',
-  credentials: 'include',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
+fetch('https://luxstayv2.onrender.com/api/hotels')
   .then((response) => response.json())
   .then((data) => {
     const hotelList = document.getElementById('hotel-list')
