@@ -4,7 +4,12 @@ loginBtn.addEventListener('click', (e) => {
   const email = document.getElementById('email').value
   const password = document.getElementById('password').value
   if (!email || !password) {
-    document.getElementById('error-message').textContent = 'Please enter both email and password'
+    Swal.fire({
+      icon: 'error',
+      title: 'Please enter email and password!',
+      showConfirmButton: false,
+      timer: 2000,
+    })
     return
   }
 
@@ -12,6 +17,7 @@ loginBtn.addEventListener('click', (e) => {
     email: email,
     password: password,
   }
+
 
   fetch('https://luxstayv2.onrender.com/identity/auth/token', {
     method: 'POST',
@@ -22,32 +28,44 @@ loginBtn.addEventListener('click', (e) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.result && data.result.token) {
+      console.log(data)
+      if (data.result && data.result.token && data.result.username) {
         // Lưu token vào localStorage
+        
         localStorage.setItem('token', data.result.token)
-        alert('Login successful!')
-        // Chuyển hướng và truyền username qua URL
-        window.location.href = '../index.html'
-      } else {
-        // Hiển thị thông báo lỗi từ phản hồi
-        document.getElementById('error-message').textContent = data.message || 'Login failed'
+        localStorage.setItem('username',data.result.username)
+        Swal.fire({
+          icon: 'success',
+          title: 'Login success!',
+          showConfirmButton: false,
+          timer: 2000,
+        })
+        setTimeout(()=> {window.location.href = '../index.html'},2000)
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Please enter email and password!',
+          showConfirmButton: false,
+          timer: 2000,
+        })
       }
     })
     .catch((error) => {
       console.error('Error:', error)
-      document.getElementById('error-message').textContent = 'An error occurred. Please try again later.'
+      
     })
 })
-function register() {
+let signupbt = document.querySelector('.signup-button')
+signupbt.addEventListener('click', (e) => {
+  e.preventDefault()
   const username = document.getElementById('username').value
-  const email = document.getElementById('password').value
-  const password = document.getElementById('password').value
+  const email = document.getElementById('email').value
+  const password = document.getElementById('pass').value
 
   if (!username || !password || !email) {
     alert('Please enter complete information')
     return
   }
-
   const registerData = {
     username: username,
     email: email,
@@ -81,4 +99,4 @@ function register() {
       console.error('Error:', error)
       document.getElementById('message').textContent = 'Registration failed: ' + error.message
     })
-}
+})
