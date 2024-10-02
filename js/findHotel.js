@@ -10,7 +10,17 @@ function searchHotel() {
     // Gọi API
     fetch(query)
       .then((response) => response.json())
-      .then((data) => data.data.forEach((hotel) => renderHotel(hotel)))
+      .then((data) => {
+        data.data.forEach((hotel) => renderHotel(hotel))
+        if (hotelList.innerHTML === '') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Không tìm thấy khách sạn nào!',
+          })
+          hotelList.innerHTML = '<p>Không tìm thấy khách sạn nào!</p>'
+        }
+      })
       .catch((error) => {
         console.error('Error:', error)
         Swal.fire({
@@ -55,7 +65,7 @@ function renderHotel(hotel) {
       </div>
     </div>
     `
-
+  
   // Thêm HTML vừa tạo vào div
   hotelList.innerHTML += hotelHTML
 }
