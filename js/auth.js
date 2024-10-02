@@ -44,7 +44,6 @@ if (!token) {
     })
     .catch((error) => {
       console.error('Có lỗi xảy ra:', error) // Xử lý lỗi
-      alert('Có lỗi xảy ra, vui lòng thử lại.')
     })
 }
 function logout() {
