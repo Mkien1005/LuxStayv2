@@ -2,11 +2,11 @@ import express from 'express'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import cors from 'cors'
 // Cấu hình các dịch vụ upstream
-const IDENTITY_SERVICE = 'https://identity-service-qboe.onrender.com'
-const REVIEW_SERVICE = 'https://review-services.onrender.com'
-const BOOKING_SERVICE = 'https://booking-service-kkos.onrender.com'
-const HOTEL_SERVICE = 'https://hotel-service-ac92.onrender.com'
-const ROOM_SERVICE = 'https://room-service-e42h.onrender.com'
+const IDENTITY_SERVICE = 'https://identity-service-qboe.onrender.com/identity'
+const REVIEW_SERVICE = 'https://review-services.onrender.com/api/reviews'
+const BOOKING_SERVICE = 'https://booking-service-kkos.onrender.com/api/bookings'
+const HOTEL_SERVICE = 'https://hotel-service-ac92.onrender.com/api/hotels'
+const ROOM_SERVICE = 'https://room-service-e42h.onrender.com/api/rooms'
 
 const app = express()
 app.use(cors())
@@ -17,9 +17,6 @@ app.use(
   createProxyMiddleware({
     target: IDENTITY_SERVICE,
     changeOrigin: true,
-    pathRewrite: {
-      '^/': '/identity',
-    },
   })
 )
 
@@ -29,9 +26,6 @@ app.use(
   createProxyMiddleware({
     target: REVIEW_SERVICE,
     changeOrigin: true,
-    pathRewrite: {
-      '^/': '/api/reviews',
-    },
   })
 )
 
@@ -49,9 +43,6 @@ app.use(
   createProxyMiddleware({
     target: HOTEL_SERVICE,
     changeOrigin: true,
-    pathRewrite: {
-      '^/': '/api/hotels',
-    },
   })
 )
 
@@ -61,9 +52,6 @@ app.use(
   createProxyMiddleware({
     target: ROOM_SERVICE,
     changeOrigin: true,
-    pathRewrite: {
-      '^/': '/api/rooms',
-    },
   })
 )
 
