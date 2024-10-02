@@ -40,22 +40,18 @@ loginBtn.addEventListener('click', (e) => {
 })
 function register() {
   const username = document.getElementById('username').value
+  const email = document.getElementById('password').value
   const password = document.getElementById('password').value
-  const fristname = document.getElementById('fristname').value
-  const lastname = document.getElementById('lastname').value
-  const dob = document.getElementById('dob').value
 
-  if (!username || !password || !fristname || !lastname || !dob) {
+  if (!username || !password || !email) {
     alert('Please enter complete information')
     return
   }
 
   const registerData = {
     username: username,
-    password: password,
-    fristName: fristname,
-    lastName: lastname,
-    dob: dob,
+    email: email,
+    password: password
   }
 
   fetch('https://luxstayv2.onrender.com/identity/users', {
