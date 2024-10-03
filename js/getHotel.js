@@ -542,7 +542,7 @@ function initOverlay() {
   }
   function isRoomAvailable(room, checkInDate, checkOutDate) {
     // Kiểm tra lịch đặt
-    const bookings = room.checkdate || []
+    const bookings = room.check_in_date || []
     return !bookings.some((booking) => {
       const bookingCheckIn = new Date(booking.checkInDate)
       const bookingCheckOut = new Date(booking.checkOutDate)
