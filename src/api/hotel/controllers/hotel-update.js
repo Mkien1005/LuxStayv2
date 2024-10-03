@@ -16,7 +16,7 @@ module.exports = {
       // Tăng số lượng phòng của khách sạn
       const updatedHotel = await strapi.services.hotel.update(
         { id: hotelId },
-        { roomCount: hotel.roomCount + 1 },
+        { rooms: hotel.rooms + 1 },
       );
 
       return ctx.send(updatedHotel);
@@ -33,7 +33,7 @@ module.exports = {
 
       const updatedHotel = await strapi.services.hotel.update(
         { id: hotelId },
-        { roomCount: hotel.roomCount - 1 },
+        { rooms: hotel.rooms - 1 },
       );
 
       return ctx.send(updatedHotel);
