@@ -1,12 +1,12 @@
-const listRooms = document.querySelectorAll('.room-table') // Lấy tất cả các phòng
-const overlay = document.querySelector('.booking-overlay') // Overlay để hiển thị khi nhấp vào phòng
-const closeBtn = document.querySelector('.close') // Nút đóng overlay
-const roomBooking = document.querySelector('.room-booking') // Phần tử .room-booking để đặt ID
+var listRooms = document.querySelectorAll('.room-table') // Lấy tất cả các phòng
+var overlay = document.querySelector('.booking-overlay') // Overlay để hiển thị khi nhấp vào phòng
+var closeBtn = document.querySelector('.close') // Nút đóng overlay
+var roomBooking = document.querySelector('.room-booking') // Phần tử .room-booking để đặt ID
 // Lặp qua từng phòng
 listRooms.forEach((card) => {
   card.addEventListener('click', () => {
     overlay.classList.add('active') // Hiển thị overlay
-    roomBooking.id = card.id // Đặt id của .room-booking là id của phòng được nhấp
+    console.log('card', card)
   })
 })
 overlay.addEventListener('click', () => {
@@ -65,10 +65,11 @@ checkBtn.addEventListener('click', (e) => {
       .then(async (data) => {
         const room = data.data.attributes
         let day = calculateDaysBetween(checkInDate, checkOutDate)
-        var price = room.price.value * day
+        var price = room.price * day
         if (rooms > 1) {
           price = price * rooms
         }
+        console.log('price', price)
         await fetch('https://luxstayv2.onrender.com/api/bookings/', {
           method: 'POST',
           headers: {

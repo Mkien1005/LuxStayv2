@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="css/rating.css" type="text/css" />
     <link rel="stylesheet" href="css/list-rooms.css" type="text/css" />
     <style>
-      .row{
+      .row {
         display: flex;
         justify-content: center;
       }
@@ -208,10 +208,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="price" style="display: flex; flex-direction: row;">
-                  <h2 id="min-price"></h2> 
-                  <h2 style="margin-left: 10px; margin-right: 10px;">-</h2>
-                  <h2 id="max-price"></h2> 
+                <div class="price" style="display: flex; flex-direction: row">
+                  <h2 id="min-price"></h2>
+                  <h2 style="margin-left: 10px; margin-right: 10px">-</h2>
+                  <h2 id="max-price"></h2>
                 </div>
                 <table>
                   <tbody>
@@ -239,66 +239,7 @@
                 </table>
               </div>
             </div>
-            <div class="list-rooms" id="list-rooms">
-              <div class="room-card">
-                <div class="room-name">Premier Triple</div>
-                <div class="room-content">
-                  <div class="slideshow-container">
-                    <div class="slides">
-                      <img src="img/room/room-1.jpg" alt="Image 1" />
-                      <img src="img/room/room-2.jpg" alt="Image 2" />
-                      <img src="img/room/room-details.jpg" alt="Image 3" />
-                      <img src="img/room/room-4.jpg" alt="Image 4" />
-                      <img src="img/room/room-5.jpg" alt="Image 5" />
-                    </div>
-
-                    <!-- Nút điều hướng -->
-                    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                    <a class="next" onclick="changeSlide(1)">&#10095;</a>
-
-                    <!-- Dấu chấm hiển thị vị trí -->
-                    <div class="dots">
-                      <span class="dot" onclick="currentSlide(1)"></span>
-                      <span class="dot" onclick="currentSlide(2)"></span>
-                      <span class="dot" onclick="currentSlide(3)"></span>
-                      <span class="dot" onclick="currentSlide(4)"></span>
-                      <span class="dot" onclick="currentSlide(5)"></span>
-                    </div>
-                  </div>
-                  <table id="24" class="room-table table table-bordered mx-2">
-                    <thead class="">
-                      <tr class="table-warning">
-                        <th scope="col">Room selection</th>
-                        <th scope="col">Guest</th>
-                        <th scope="col">Price/Room/Night</th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td rowspan="3">
-                          <div class="room-title">Premier Triple</div>
-                          <div class="room-option">Breakfast not included</div>
-                          <div class="room-option">No refunds</div>
-                          <div class="room-option">1 single bed</div>
-                        </td>
-                        <td rowspan="3" class="text-center"><i class="fa fa-user"></i> <i class="fa fa-user"></i></td>
-                        <td rowspan="3">
-                          <div class="room-price">
-                            <span class="original-price" style="display: block">1.000 VND</span>
-                            2.924 VND
-                          </div>
-                        </td>
-                        <td rowspan="3" class="text-right">
-                          <div class="availability">Only 1 room left</div>
-                          <a class="select-button">Select</a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <div class="list-rooms" id="list-rooms"></div>
             <div class="rd-reviews">
               <h4>Reviews</h4>
             </div>
@@ -482,7 +423,6 @@
 
     <!-- Js Plugins -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/findRoomAvailable.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>

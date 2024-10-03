@@ -63,8 +63,8 @@ async function fetchRoomAndReviews(hotelId) {
       throw new Error('Không tìm thấy phòng hoặc khách sạn này chưa có phòng.')
     }
     const roomData = await roomResponse.json()
-    console.log('Room Data:', roomData) // In thông tin room ra console
-
+    displayRoomData(roomData.data)
+    initOverlay()
     // Fetch reviews liên quan đến room_id
     const reviewsResponse = await fetch(`https://luxstayv2.onrender.com/api/reviews/?filters[hotel_id][$eq]=${hotelId}`, {
       method: 'GET',
@@ -73,13 +73,12 @@ async function fetchRoomAndReviews(hotelId) {
       },
     })
     if (!reviewsResponse.ok) {
-      throw new Error('Không tìm thấy bài đánh giá nào hoặc chưa có người đánh giá.')
+      console.log('Không tìm thấy bài đánh giá nào hoặc chưa có người đánh giá.')
     }
     const reviewsData = await reviewsResponse.json()
     console.log('Reviews Data:', reviewsData) // In thông tin reviews ra console
 
     // Xử lý hiển thị room và review ở đây
-    displayRoomData(roomData)
     displayReviews(reviewsData.data) // Assuming reviews are inside `data` field
   } catch (error) {
     console.error('Lỗi khi fetch room hoặc reviews:', error)
@@ -87,7 +86,74 @@ async function fetchRoomAndReviews(hotelId) {
 }
 fetchRoomAndReviews(hotelId)
 
-function displayRoomData(roomData) {}
+function displayRoomData(roomData) {
+  var roomList = document.querySelector('.list-rooms')
+  roomList.innerHTML = '' // Clear previous content
+  roomData.forEach((data) => {
+    let images = Object.values(data.attributes.images)
+    let roomCard = document.createElement('div')
+    roomCard.className = 'room-card'
+    roomCard.innerHTML = `
+      <div class="room-name">${data.attributes.name}</div>
+      <div class="room-content">
+        <div class="slideshow-container">
+          <div class="slides">
+            ${images.map((image) => `<img src="${image}" alt="Image 1" class="active" style="transform: translateX(0px);">`).join('')}
+          </div>
+
+          <!-- Navigation buttons -->
+          <a class="prev" style="display: none;">❮</a>
+          <a class="next" style="display: none;">❯</a>
+
+          <!-- Dots for slide position -->
+          <div class="dots">
+            ${images.map((image, index) => `<span class="dot active" onclick="currentSlide(${index + 1})"></span>`).join('')}
+          </div>
+        </div>
+
+        <table id="${data.id}" class="room-table table table-bordered mx-2">
+          <thead class="table-warning">
+            <tr>
+              <th scope="col">Room selection</th>
+              <th scope="col">Guest</th>
+              <th scope="col">Price/Room/Night</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3">
+                <div class="room-title">${data.attributes.type} Room</div>
+                <div class="room-option">${data.attributes.description}</div>
+              </td>
+              ${
+                data.attributes.capacity === 'Single'
+                  ? `<td rowspan="3" class="text-center"><i class="fa fa-user"></i></td>`
+                  : data.attributes.capacity === 'Couple'
+                  ? `<td rowspan="3" class="text-center"><i class="fa fa-user"></i> <i class="fa fa-user"></i></td>`
+                  : `<td rowspan="3" class="text-center"><i class="fa fa-user"></i> <i class="fa fa-user"></i> <i class="fa fa-user"></i><i class="fa fa-user"></i></td>`
+              }
+
+              <td rowspan="3">
+                <div class="room-price">
+                  <span class="original-price" style="display: block">1000 VND</span>
+                  ${data.attributes.price} VND
+                </div>
+              </td>
+              <td rowspan="3" class="text-right">
+                <a class="select-button">Select</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>`
+    roomList.appendChild(roomCard)
+    let slideContainer = roomCard.querySelector('.slideshow-container')
+    console.log('slideContainer', slideContainer)
+    initSlide(slideContainer)
+  })
+}
 
 function displayReviews(reviewsData) {
   reviewsData.forEach((data) => {
@@ -246,53 +312,256 @@ function unlike(likedButton) {
       console.error('Error:', error)
     })
 }
-let currentSlideIndex = 0
-const slides = document.querySelectorAll('.slides img')
-const dots = document.querySelectorAll('.dot')
 
-function showSlide(index) {
-  // Xử lý chỉ số trượt
-  if (index >= slides.length) {
-    currentSlideIndex = 0
-  } else if (index < 0) {
-    currentSlideIndex = slides.length - 1
-  } else {
-    currentSlideIndex = index
+function initSlide(slideContainer) {
+  let currentSlideIndex = 0
+  const slides = slideContainer.querySelectorAll('.slides img')
+  const dots = slideContainer.querySelectorAll('.dot')
+  // Khởi tạo trạng thái ban đầu
+  showSlide(currentSlideIndex)
+  function showSlide(index) {
+    // Xử lý chỉ số trượt
+    if (index >= slides.length) {
+      currentSlideIndex = 0
+    } else if (index < 0) {
+      currentSlideIndex = slides.length - 1
+    } else {
+      currentSlideIndex = index
+    }
+
+    // Ẩn tất cả các ảnh
+    slides.forEach((slide, idx) => {
+      slide.classList.remove('active')
+      slide.style.transform = 'translateX(0)' // Reset animation
+    })
+
+    // Hiển thị ảnh hiện tại
+    slides[currentSlideIndex].classList.add('active')
+
+    // Cập nhật dấu chấm
+    dots.forEach((dot) => dot.classList.remove('active'))
+    dots[currentSlideIndex].classList.add('active')
   }
-
-  // Ẩn tất cả các ảnh
-  slides.forEach((slide, idx) => {
-    slide.classList.remove('active')
-    slide.style.transform = 'translateX(0)' // Reset animation
+  const prev = slideContainer.querySelector('.prev')
+  const next = slideContainer.querySelector('.next')
+  slideContainer.addEventListener('mouseover', () => {
+    prev.style.display = 'inline'
+    next.style.display = 'inline'
+  })
+  slideContainer.addEventListener('mouseout', () => {
+    prev.style.display = 'none'
+    next.style.display = 'none'
   })
 
-  // Hiển thị ảnh hiện tại
-  slides[currentSlideIndex].classList.add('active')
-
-  // Cập nhật dấu chấm
-  dots.forEach((dot) => dot.classList.remove('active'))
-  dots[currentSlideIndex].classList.add('active')
+  function changeSlide(step) {
+    showSlide(currentSlideIndex + step)
+  }
+  prev.addEventListener('click', () => {
+    changeSlide(-1)
+  })
+  next.addEventListener('click', () => {
+    changeSlide(1)
+  })
 }
+function initOverlay() {
+  var listRooms = document.querySelectorAll('.room-table') // Lấy tất cả các phòng
+  var overlay = document.querySelector('.booking-overlay') // Overlay để hiển thị khi nhấp vào phòng
+  var closeBtn = document.querySelector('.close') // Nút đóng overlay
+  var roomBooking = document.querySelector('.room-booking') // Phần tử .room-booking để đặt ID
+  // Lặp qua từng phòng
+  listRooms.forEach((card) => {
+    card.addEventListener('click', () => {
+      overlay.classList.add('active') // Hiển thị overlay
+      roomBooking.id = card.id
+    })
+  })
+  overlay.addEventListener('click', () => {
+    overlay.classList.remove('active')
+  })
+  roomBooking.addEventListener('click', (e) => {
+    e.stopPropagation()
+  })
+  // Nút đóng overlay
+  closeBtn.addEventListener('click', () => {
+    overlay.classList.remove('active') // Ẩn overlay
+  })
 
-function changeSlide(step) {
-  showSlide(currentSlideIndex + step)
+  const checkBtn = document.querySelector('#checkAvailable')
+  checkBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    const checkin = document.querySelector('#date-in').value
+    const checkout = document.querySelector('#date-out').value
+    // Kiểm tra ngày checkin
+    if (checkin === 'Invalid Date' || !checkin) {
+      alert('Please choose a check-in day!')
+      return
+    }
+
+    // Kiểm tra ngày checkout
+    if (checkout === 'Invalid Date' || !checkout) {
+      alert('Please choose a check-out day!')
+      return
+    }
+    // Chuyển đổi các chuỗi ngày thành đối tượng Date
+    let checkInDate = convertToISO8601(checkin).substring(0, 10)
+    let checkOutDate = convertToISO8601(checkout).substring(0, 10)
+    // Kiểm tra xem ngày checkout có sau ngày checkin không
+    if (checkout <= checkin) {
+      alert('Check-out date must be after check-in date!')
+      return
+    }
+    const guestsText = document.querySelector('#guest + .nice-select .current').textContent
+    const guests = guestsText.replace(/\D/g, '') // Loại bỏ tất cả các ký tự không phải số
+    // Lấy giá trị số lượng rooms từ nice-select của room
+    const roomsText = document.querySelector('#room + .nice-select .current').textContent
+    const rooms = roomsText.replace(/\D/g, '') // Loại bỏ tất cả các ký tự không phải số
+    overlay.classList.remove('active')
+    const id = roomBooking.id
+    try {
+      fetch(`https://luxstayv2.onrender.com/api/rooms/${id}`)
+        .then((response) => response.json())
+        .then(async (data) => {
+          const room = data.data.attributes
+          let day = calculateDaysBetween(checkInDate, checkOutDate)
+          var price = room.price * day
+          if (rooms > 1) {
+            price = price * rooms
+          }
+          console.log('price', price)
+          await fetch('https://luxstayv2.onrender.com/api/bookings/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              data: {
+                check_in: checkInDate,
+                check_out: checkOutDate,
+                user_id: 1,
+                room_id: id,
+                total: price,
+              },
+            }),
+          })
+            .then((response) => response.json())
+            .then((booking) => {
+              console.log('Data:', booking)
+              if (booking.data) {
+                let idBooking = booking.data.id
+                if (isRoomAvailable(room, checkInDate, checkOutDate)) {
+                  // Tạo overlay
+                  const overlay = document.createElement('div')
+                  overlay.classList.add('message-overlay', 'active')
+                  // Tạo phần tử message
+                  const messageBox = document.createElement('div')
+                  messageBox.classList.add('message')
+
+                  // Tạo tiêu đề
+                  const heading = document.createElement('h3')
+                  heading.textContent = 'Do you want to book this room?'
+
+                  // Tạo phần tử Guest
+                  const guestInfo = document.createElement('p')
+                  guestInfo.textContent = `Guest: ${guests}`
+
+                  // Tạo phần tử Room
+                  const roomInfo = document.createElement('p')
+                  roomInfo.textContent = `Room: ${rooms}`
+                  const checkIn = document.createElement('p')
+                  checkIn.textContent = `Check in: ${checkin}`
+                  const checkOut = document.createElement('p')
+                  checkOut.textContent = `Check out: ${checkout}`
+                  // Tạo input giá
+                  const priceInput = document.createElement('p')
+                  priceInput.textContent = `Price: ${price} VNĐ`
+
+                  // Tạo nút Đặt ngay
+                  const bookButton = document.createElement('a')
+                  bookButton.classList.add('select-button', 'book-now')
+                  bookButton.textContent = 'Booking now'
+                  bookButton.style.right = '40px'
+                  bookButton.style.position = 'absolute'
+                  bookButton.setAttribute('href', `order.html?amount=${price}&order_id=${idBooking}`)
+                  // Tạo nút Quay lại
+                  const backButton = document.createElement('a')
+                  backButton.classList.add('select-button', 'back')
+                  backButton.textContent = 'Back'
+
+                  // Thêm các phần tử vào messageBox
+                  messageBox.appendChild(heading)
+                  messageBox.appendChild(guestInfo)
+                  messageBox.appendChild(roomInfo)
+                  messageBox.appendChild(checkIn)
+                  messageBox.appendChild(checkOut)
+                  messageBox.appendChild(priceInput)
+                  messageBox.appendChild(bookButton)
+                  messageBox.appendChild(backButton)
+
+                  // Thêm messageBox vào overlay
+                  overlay.appendChild(messageBox)
+
+                  // Thêm overlay vào body của trang
+                  document.body.appendChild(overlay)
+                  let messageOverlay = document.querySelector('.message-overlay')
+                  let back = document.querySelector('.back')
+                  back.addEventListener('click', async () => {
+                    messageOverlay.classList.remove('active')
+                    await fetch(`https://luxstayv2.onrender.com/api/bookings/${idBooking}`, {
+                      method: 'DELETE',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                    })
+                  })
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Phòng bạn muốn không có sẵn trong những ngày này',
+                  })
+                  console.log('oops :>> ')
+                }
+              }
+            })
+        })
+        .catch((error) => console.log(error))
+      return rooms
+    } catch (error) {
+      console.error('Error fetching rooms:', error)
+    }
+  })
+  function convertToISO8601(dateString) {
+    // Tách chuỗi theo dấu '-'
+    const [day, month, year] = dateString.split('-')
+
+    // Tạo chuỗi ISO 8601 theo định dạng yyyy-mm-dd
+    const isoDateString = `${year}-${month}-${day}T00:00:00Z`
+
+    return isoDateString
+  }
+  function isRoomAvailable(room, checkInDate, checkOutDate) {
+    // Kiểm tra lịch đặt
+    const bookings = room.checkdate || []
+    return !bookings.some((booking) => {
+      const bookingCheckIn = new Date(booking.checkInDate)
+      const bookingCheckOut = new Date(booking.checkOutDate)
+      return bookingCheckIn <= new Date(checkOutDate) && bookingCheckOut >= new Date(checkInDate)
+    })
+  }
+  function calculateDaysBetween(checkIn, checkOut) {
+    // Ngày cụ thể truyền vào dưới dạng chuỗi
+    let checkin = new Date(checkIn)
+
+    // Ngày hiện tại
+    let checkout = new Date(checkOut)
+
+    // Tính sự khác biệt về thời gian (milliseconds)
+    let timeDifference = checkout - checkin
+
+    // Chuyển đổi sự khác biệt thời gian từ milliseconds thành số ngày
+    let dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+
+    return dayDifference
+  }
 }
-
-function currentSlide(index) {
-  showSlide(index - 1) // Chuyển từ vị trí hiển thị (1-based) sang chỉ số (0-based)
-}
-
-// Khởi tạo trạng thái ban đầu
-showSlide(currentSlideIndex)
-
-const slide = document.querySelector('.slideshow-container')
-const prev = document.querySelector('.prev')
-const next = document.querySelector('.next')
-slide.addEventListener('mouseover', () => {
-  prev.style.display = 'inline'
-  next.style.display = 'inline'
-})
-slide.addEventListener('mouseout', () => {
-  prev.style.display = 'none'
-  next.style.display = 'none'
-})
