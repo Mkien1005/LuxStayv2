@@ -60,7 +60,7 @@ async function renderHotel(hotel) {
           <img src="${hotel.attributes.images[0].url}" alt="${hotel.attributes.name}" />
           <div class="ri-text">
             <h4>${hotel.attributes.name}</h4>
-            <h3>${hotel.attributes.star} stars<span>/Pernight</span></h3>
+            <h3>${hotel.attributes.star} stars</h3>
             <table>
               <tbody>
                 <tr>
