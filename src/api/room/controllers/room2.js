@@ -17,7 +17,7 @@ module.exports = createCoreController("api::room.room", ({ strapi }) => ({
       });
 
       // Nếu không có phòng nào
-      if (rooms === null) {
+      if (rooms === 0) {
         return ctx.send({ minPrice: 0, maxPrice: 0 });
       }
 
