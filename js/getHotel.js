@@ -20,6 +20,26 @@ function renderHotel(hotel) {
   const hotelStar = document.querySelector('.hotel-star')
   let star = parseInt(hotel.attributes.star)
   hotelStar.innerHTML = '<i class="fa fa-star"></i>'.repeat(star) + '<i class="fa fa-star-o"></i>'.repeat(5 - star)
+  const hotelAddress = document.querySelector('#hotel-address')
+  hotelAddress.textContent = hotel.attributes.address
+  const hotelDescription = document.querySelector('#hotel-description')
+  hotelDescription.textContent = hotel.attributes.comment
+  const hotelEmail = document.querySelector('#hotel-email')
+  hotelEmail.textContent = hotel.attributes.email
+  const hotelQuantity = document.querySelector('#hotel-quantity')
+  hotelQuantity.textContent = hotel.attributes.rooms
+  const hotelPhone = document.querySelector('#hotel-phone')
+  hotelPhone.textContent = hotel.attributes.phone_number
+  fetch(`https://luxstayv2.onrender.com/api/rooms/min-max-price/${hotelId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const minPrice = data.minPrice
+      const maxPrice = data.maxPrice
+      const minPriceElement = document.querySelector('#min-price')
+      const maxPriceElement = document.querySelector('#max-price')
+      minPriceElement.textContent = minPrice
+      maxPriceElement.textContent = maxPrice
+    })
 }
 // Hàm fetch dữ liệu room và review
 async function fetchRoomAndReviews(hotelId) {
