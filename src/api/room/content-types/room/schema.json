@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rooms",
+  "info": {
+    "singularName": "room",
+    "pluralName": "rooms",
+    "displayName": "Room"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "hotel_id": {
+      "type": "biginteger"
+    },
+    "capacity": {
+      "type": "enumeration",
+      "enum": [
+        "Single",
+        "Couple",
+        "Family"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Vip",
+        "Standard"
+      ]
+    },
+    "images": {
+      "type": "json"
+    },
+    "check_in_date": {
+      "type": "json"
+    },
+    "price": {
+      "type": "float"
+    }
+  }
+}
