@@ -14,11 +14,11 @@ if (!token || !username) {
 
   // Cập nhật dropdown menu
   const dropdownList = document.getElementById('dropdownList')
-
+  dropdownList.style.paddingLeft = '0px'
   // Thay đổi nội dung của ul bằng innerHTML
   dropdownList.innerHTML = `
     <li><a href="" onclick="logout()">Logout</a></li> <!-- Thêm một mục mới -->
-    <li><a href="#">Profile</a></li> <!-- Thêm một mục mới -->
+    <li><a href="../profile.html">Profile</a></li> <!-- Thêm một mục mới -->
   `
 }
 
