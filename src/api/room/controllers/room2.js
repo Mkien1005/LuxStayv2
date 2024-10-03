@@ -17,12 +17,12 @@ module.exports = createCoreController("api::room.room", ({ strapi }) => ({
       });
 
       // Nếu không có phòng nào
-      if (rooms === 0) {
+      if (rooms.length === 0) {
         return ctx.send({ minPrice: 0, maxPrice: 0 });
       }
 
       // Tính toán min và max giá
-      const prices = rooms.map((room) => room.price.value);
+      const prices = rooms.map((room) => room.price);
       const minPrice = Math.min(...prices);
       const maxPrice = Math.max(...prices);
 
