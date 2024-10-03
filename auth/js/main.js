@@ -33,6 +33,7 @@ loginBtn.addEventListener('click', (e) => {
         // Lưu token vào localStorage
         
         localStorage.setItem('token', data.result.token)
+        localStorage.setItem('id',data.result.id)
         localStorage.setItem('username',data.result.username)
         Swal.fire({
           icon: 'success',
