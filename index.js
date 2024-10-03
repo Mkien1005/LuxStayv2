@@ -30,12 +30,12 @@ app.use(
 )
 
 // Proxy cho dịch vụ Bookings
-app.use('/api/bookings', (url) => {
+app.use('/api/bookings',
   createProxyMiddleware({
     target: BOOKING_SERVICE,
     changeOrigin: true,
   })
-})
+)
 
 // Proxy cho dịch vụ Hotels
 app.use(
