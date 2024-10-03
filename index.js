@@ -6,7 +6,7 @@ const IDENTITY_SERVICE = 'https://identity-service-qboe.onrender.com/identity'
 const REVIEW_SERVICE = 'https://review-services.onrender.com/api/reviews'
 const BOOKING_SERVICE = 'https://booking-service-kkos.onrender.com/api/bookings'
 const HOTEL_SERVICE = 'https://hotel-service-ac92.onrender.com/api/hotels'
-const ROOM_SERVICE = 'https://room-service-e42h.onrender.com/api/rooms'
+const ROOM_SERVICE = 'https://room-service-q9pa.onrender.com/api/rooms'
 
 const app = express()
 app.use(cors())
