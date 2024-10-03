@@ -3,7 +3,7 @@ module.exports = {
     {
       method: "GET",
       path: "/rooms/min-max-price/:hotelId",
-      handler: "room.getMinMaxPrice",
+      handler: "room2.getMinMaxPrice",
       config: {
         auth: false,
       },
