@@ -2,10 +2,7 @@ const axios = require("axios");
 
 module.exports = {
   async afterCreate(event) {
-    console.log(
-      "afterCreate lifecycle triggered for Room ID:",
-      event.result.id
-    );
+    console.log("afterCreate lifecycle triggered for Room ID:", event);
 
     try {
       await axios.post("https://hotel-service-ac92.onrender.com/api/events", {
