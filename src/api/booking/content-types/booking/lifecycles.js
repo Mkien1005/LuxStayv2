@@ -11,8 +11,7 @@ module.exports = {
         method: "GET",
         url: `https://room-service-q9pa.onrender.com/api/rooms/${roomId}`,
       });
-      console.log(room);
-      let check_in_date = room.data.attributes.check_in_date;
+      let check_in_date = room.data.data.attributes.check_in_date;
       check_in_date = [
         ...check_in_date,
         {
