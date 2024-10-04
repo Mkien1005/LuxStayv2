@@ -1,3 +1,4 @@
+const axios = require("axios");
 module.exports = {
   async afterUpdate(event) {
     let status = event.result.status;
@@ -6,7 +7,7 @@ module.exports = {
       let checkIn = event.result.check_in;
       let checkOut = event.result.check_out;
 
-      let room = await strapi.plugins["axios"].request({
+      let room = await axios.request({
         method: "GET",
         url: `https://room-service-q9pa.onrender.com/api/rooms/${roomId}`,
       });
@@ -19,7 +20,7 @@ module.exports = {
         },
       ];
 
-      await strapi.plugins["axios"].request({
+      await axios.request({
         method: "PUT",
         url: `https://room-service-q9pa.onrender.com/api/rooms/${roomId}`,
         data: {
