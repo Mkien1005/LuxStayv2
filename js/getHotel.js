@@ -449,7 +449,7 @@ function initOverlay() {
               console.log('Data:', booking)
               if (booking.data) {
                 let idBooking = booking.data.id
-                if (isRoomAvailable(room, checkInDate, checkOutDate)) {
+                if (isRoomAvailable(room.check_in_date, checkInDate, checkOutDate)) {
                   // Tạo overlay
                   const overlay = document.createElement('div')
                   overlay.classList.add('message-overlay', 'active')
@@ -540,14 +540,23 @@ function initOverlay() {
 
     return isoDateString
   }
-  function isRoomAvailable(room, checkInDate, checkOutDate) {
-    // Kiểm tra lịch đặt
-    const bookings = room.check_in_date || []
-    return !bookings.some((booking) => {
-      const bookingCheckIn = new Date(booking.checkInDate)
-      const bookingCheckOut = new Date(booking.checkOutDate)
-      return bookingCheckIn <= new Date(checkOutDate) && bookingCheckOut >= new Date(checkInDate)
-    })
+  function isRoomAvailable(bookingDates, newCheckIn, newCheckOut) {
+    // Chuyển đổi ngày mới từ chuỗi sang đối tượng Date
+    const newCheckInDate = new Date(newCheckIn)
+    const newCheckOutDate = new Date(newCheckOut)
+
+    // Kiểm tra từng booking date trong mảng
+    for (let booking of bookingDates) {
+      const bookedCheckIn = new Date(booking.check_in)
+      const bookedCheckOut = new Date(booking.check_out)
+
+      // Kiểm tra nếu khoảng thời gian mới trùng với khoảng đã đặt
+      if (newCheckInDate < bookedCheckOut && newCheckOutDate > bookedCheckIn) {
+        return false // Không khả dụng
+      }
+    }
+
+    return true // Phòng khả dụng
   }
   function calculateDaysBetween(checkIn, checkOut) {
     // Ngày cụ thể truyền vào dưới dạng chuỗi
